@@ -27,11 +27,13 @@ const DOBRA = [
   { width: 390, height: 844 },
 ];
 const ALVO_MOBILE = 44;
+// Mesmo `base` do astro.config.mjs: o preview serve o site nesse subcaminho.
+const BASE = '/paraiso-da-crianca';
 
 async function subirPreview() {
   // detached: o npx abre um processo filho; matamos o grupo inteiro no final.
   const proc = spawn('npx', ['astro', 'preview', '--port', String(PORTA), '--ignore-lock'], { stdio: 'ignore', detached: true });
-  const base = `http://localhost:${PORTA}`;
+  const base = `http://localhost:${PORTA}${BASE}`;
   for (let i = 0; i < 60; i++) {
     try {
       const r = await fetch(base);

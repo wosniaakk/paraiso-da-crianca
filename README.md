@@ -1,6 +1,6 @@
 # Paraíso da Criança: site institucional
 
-Site estático em [Astro](https://astro.build), publicado no GitHub Pages (`https://edu-rdp.github.io/`).
+Site estático em [Astro](https://astro.build), publicado no GitHub Pages (`https://wosniaakk.github.io/paraiso-da-crianca/`).
 
 ## Comandos
 
@@ -36,8 +36,8 @@ Trechos que dependem de confirmação da escola estão marcados com `CONFIRMAR C
 
 ```bash
 npm run build && npm run qa                                   # rolagem, dobra, axe, alvos, links (screenshots em qa/)
-node scripts/testar-formulario.mjs whatsapp http://localhost:4321   # com `npm run preview` rodando
-PUBLIC_FORM_ENDPOINT=https://formspree.io/f/teste npm run build && node scripts/testar-formulario.mjs endpoint http://localhost:4321
+node scripts/testar-formulario.mjs whatsapp http://localhost:4321/paraiso-da-crianca   # com `npm run preview` rodando
+PUBLIC_FORM_ENDPOINT=https://formspree.io/f/teste npm run build && node scripts/testar-formulario.mjs endpoint http://localhost:4321/paraiso-da-crianca
 node scripts/auditar-links.mjs                                # rótulo × destino de todos os links
 ```
 
