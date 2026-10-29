@@ -1,32 +1,71 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
+import Link from '../components/Link.astro';
 import { site } from '../data/site';
 import { whatsapp } from '../lib/whatsapp';
-import Link from '../components/Link.astro';
+
+// O texto sobre o formulário depende do serviço configurado no build (ver README).
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const servicoFormulario = /formspree/i.test(endpoint)
+  ? 'Formspree'
+  : /web3forms/i.test(endpoint)
+    ? 'Web3Forms'
+    : endpoint
+      ? 'um serviço de envio de formulários'
+      : null;
+const linkPrivacidade = whatsapp('Olá! Tenho uma dúvida sobre privacidade e o uso dos meus dados pelo Paraíso da Criança.');
 ---
 <BaseLayout title="Política de privacidade | Paraíso da Criança" description="Como o site do Paraíso da Criança trata dados de navegação e contato." cta={false}>
   <PageIntro eyebrow="Transparência" title="Política de privacidade">
     Esta página explica, em linguagem simples, o que acontece quando você navega pelo site ou entra em contato com a escola.
   </PageIntro>
 
-  <section class="section section-paper">
-    <div class="container prose">
-      <h2>Fontes tipográficas</h2>
-      <p>Para manter a identidade visual, o site solicita as fontes Nunito e Caveat ao Google Fonts. Essa requisição pode transmitir dados técnicos básicos, como endereço IP, ao provedor da fonte, de acordo com as políticas dele.</p>
-    </div>
-  </section>
-
   <section class="section section-white">
     <div class="container prose">
-      <p>O site institucional do Paraíso da Criança apresenta informações sobre a escola e oferece um link para conversa direta com a secretaria pelo WhatsApp. Não há cadastro de visitantes, formulário próprio, cookies de publicidade ou ferramentas de análise instaladas nesta versão.</p>
+      <h2>Resumo</h2>
+      <p>O responsável pelos dados tratados por este site é o <strong>Paraíso da Criança Educação Infantil</strong>. O site apresenta informações sobre a escola e oferece três formas de contato: WhatsApp, telefone e um formulário de agendamento de visita.</p>
+      <ul>
+        <li>Só recebemos os dados que você decide nos enviar, e eles são usados apenas para responder ao seu contato e combinar a visita.</li>
+        <li>O site não tem cadastro de visitantes, cookies de publicidade nem ferramentas de análise de audiência.</li>
+        <li>O mapa do Google só é carregado se você pedir.</li>
+        <li>Você pode pedir acesso, correção ou exclusão dos seus dados a qualquer momento.</li>
+      </ul>
+
       <h2>Quando você fala com a escola</h2>
-      <p>Ao clicar no WhatsApp, você será direcionado para o serviço da Meta. A conversa e os dados enviados passam a seguir as políticas e os termos desse serviço. A escola pode receber informações que você escolher compartilhar, como nome, telefone e idade da criança, para responder à sua solicitação.</p>
+      <h3>Formulário de agendamento</h3>
+      <p>Na página Agende sua visita, o formulário pede <strong>nome, telefone e idade da criança</strong> (obrigatórios) e, se você quiser, <strong>período preferido e melhor horário para retorno</strong>. Usamos esses dados apenas para entrar em contato com você e agendar a visita.</p>
+      {servicoFormulario ? (
+        <p>Ao enviar, os dados são transmitidos por meio do {servicoFormulario}, que os entrega à secretaria da escola, de acordo com as políticas desse serviço. Os dados não são usados para outra finalidade nem repassados a terceiros.</p>
+      ) : (
+        <p>O formulário não envia nada para servidores do site: ele apenas monta uma mensagem com os dados preenchidos e abre o WhatsApp, onde você decide se envia. A partir daí, valem as regras do WhatsApp, descritas abaixo.</p>
+      )}
+      <p>Guardamos os dados pelo tempo necessário para responder ao seu contato e organizar a visita. Se a matrícula não seguir adiante, você pode pedir a exclusão a qualquer momento.</p>
+      <h3>WhatsApp</h3>
+      <p>Ao clicar no WhatsApp, você é direcionado para o serviço da Meta. A conversa e os dados enviados passam a seguir as políticas e os termos desse serviço. A escola recebe as informações que você escolher compartilhar, como nome, telefone e idade da criança, para responder à sua solicitação.</p>
+      <h3>Telefone</h3>
+      <p>Nas ligações para {site.telefone}, a secretaria anota apenas o necessário para retornar o contato e agendar a visita.</p>
+
       <h2>Dados de navegação</h2>
-      <p>O site é publicado como páginas estáticas. O provedor de hospedagem pode registrar dados técnicos básicos, como endereço IP, data e navegador, de acordo com suas próprias políticas e medidas de segurança.</p>
+      <p>O site é publicado como páginas estáticas no GitHub Pages. O provedor de hospedagem pode registrar dados técnicos básicos, como endereço IP, data e navegador, de acordo com suas próprias políticas e medidas de segurança.</p>
+      <h3>Google Fonts</h3>
+      <p>Para manter a identidade visual, o site solicita as fontes Nunito e Caveat ao Google Fonts. Essa requisição pode transmitir dados técnicos básicos, como endereço IP, ao Google, de acordo com as políticas dele.</p>
+      <h3>Mapa</h3>
+      <p>Na página Agende sua visita, o mapa do Google Maps só é carregado quando você clica em “Carregar mapa”. A partir desse clique, o Google pode registrar dados de navegação e usar cookies, de acordo com as políticas dele. O link “Abrir no mapa” leva ao site do Google Maps.</p>
+
+      <h2>Seus direitos</h2>
+      <p>Pela Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018), você pode pedir à escola, a qualquer momento:</p>
+      <ul>
+        <li><strong>acesso</strong> aos dados que temos sobre você;</li>
+        <li><strong>correção</strong> de dados incompletos ou desatualizados;</li>
+        <li><strong>exclusão</strong> dos dados que você nos enviou.</li>
+      </ul>
+      <p>Basta entrar em contato pelos canais abaixo.</p>
+
       <h2>Contato</h2>
-      <p>Para dúvidas sobre privacidade, fale diretamente com a secretaria pelo <Link href={whatsapp('Olá! Tenho uma dúvida sobre privacidade e o uso dos meus dados pelo Paraíso da Criança.')}>WhatsApp</Link> ou pelo telefone <a href={site.telefoneHref}>{site.telefone}</a>.</p>
-      <p><small>Última atualização: outubro de 2026.</small></p>
+      <p>Para dúvidas sobre privacidade ou para exercer seus direitos, fale com a secretaria do Paraíso da Criança Educação Infantil pelo <Link href={linkPrivacidade}>WhatsApp</Link> ou pelo telefone <a href={site.telefoneHref}>{site.telefone}</a>, {site.atendimento.toLowerCase()}.</p>
+      <p><small>Última atualização: 29 de outubro de 2026.</small></p>
+      <Fragment set:html="<!-- PENDENTE: este texto precisa de revisão jurídica antes da publicação definitiva. Faltam razão social, CNPJ e canal formal para pedidos da LGPD (confirmar com a escola). -->" />
     </div>
   </section>
 </BaseLayout>
