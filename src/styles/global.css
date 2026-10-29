@@ -48,7 +48,9 @@ a { color: inherit; }
 .button-light:hover { background: #fff7f1; }
 .button-outline { color: var(--white); box-shadow: none; background: none; border: 2px solid #ffffffb3; }
 .button-outline:hover { background: #ffffff1f; }
-.mobile-menu { margin-left: auto; display: none; }
+.mobile-menu { display: none; }
+.nav-whatsapp { color: var(--white); background: var(--red-dark); border-radius: 50%; flex: none; place-items: center; width: 44px; height: 44px; margin-left: auto; display: none; }
+.nav-whatsapp:hover { background: #aa1d1d; }
 .mobile-menu summary { cursor: pointer; padding: .7rem 0; font-weight: 800; list-style: none; }
 .mobile-menu summary::-webkit-details-marker { display: none; }
 .mobile-menu nav { background: var(--white); border: 1px solid var(--line); border-radius: 18px; gap: .35rem; padding: 1rem; display: grid; position: absolute; top: 74px; left: 1.25rem; right: 1.25rem; box-shadow: 0 18px 30px #34343f1f; }
@@ -204,6 +206,7 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 .visit-detail { gap: .15rem; display: grid; }
 .visit-detail strong { color: #ffdc58; letter-spacing: .1em; text-transform: uppercase; font-size: .75rem; }
 .visit-detail a { color: var(--white); font-size: 1.05rem; text-decoration: none; }
+.visit-card .hero-actions { margin-top: .4rem; }
 .visit-card h2 + p { margin-bottom: 1.6rem; }
 
 /* Formulário de visita */
@@ -265,6 +268,8 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 @media (width <= 950px) {
   .desktop-nav, .nav-cta { display: none; }
   .mobile-menu { display: block; }
+  .nav-whatsapp { display: grid; }
+  .nav-shell { gap: .9rem; }
   .split, .split-reverse, .activity-layout { grid-template-columns: 1fr; gap: 2.5rem; }
   .split-reverse .photo-stack { order: -1; }
   .house-grid, .value-grid { grid-template-columns: repeat(2, 1fr); }

@@ -1,6 +1,7 @@
 ---
 import { site } from '../data/site';
 import { url } from '../lib/url';
+import { whatsapp } from '../lib/whatsapp';
 ---
 <footer class="site-footer">
   <div class="footer-grid">
@@ -11,7 +12,8 @@ import { url } from '../lib/url';
     <div>
       <p class="footer-label">Visite a gente</p>
       <address>{site.endereco}</address>
-      <a href={site.telefoneHref}>{site.telefone}</a>
+      <a href={site.telefoneHref}>Telefone {site.telefone}</a>
+      <a href={whatsapp()} target="_blank" rel="noreferrer">WhatsApp {site.telefone} ↗</a>
       <span>{site.atendimento}</span>
     </div>
     <div>

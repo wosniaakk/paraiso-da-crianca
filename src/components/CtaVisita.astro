@@ -1,0 +1,25 @@
+---
+// Chamada para visita antes do rodapé (aplicada pelo BaseLayout).
+import { site } from '../data/site';
+import { url } from '../lib/url';
+import { whatsapp } from '../lib/whatsapp';
+---
+<section class="section section-white">
+  <div class="container">
+    <div class="visit-card">
+      <div>
+        <p class="kicker">Vamos conversar?</p>
+        <h2>Venha sentir o Paraíso de perto.</h2>
+        <p>Uma visita é o melhor jeito de conhecer os ambientes, tirar dúvidas e perceber se a nossa escola combina com a sua família.</p>
+        <div class="hero-actions">
+          <a class="button" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a>
+          <a class="button button-light" href={whatsapp()} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="visit-details">
+        <div class="visit-detail"><strong>Onde estamos</strong><span>{site.endereco}</span></div>
+        <div class="visit-detail"><strong>Telefone e WhatsApp</strong><a href={site.telefoneHref}>{site.telefone}</a><span>{site.atendimento}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
