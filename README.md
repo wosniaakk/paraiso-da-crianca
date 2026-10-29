@@ -31,3 +31,21 @@ Para configurar localmente, copie `.env.example` para `.env`. No GitHub Pages, c
 - `src/lib/whatsapp.ts`: todos os links do WhatsApp (com mensagem pronta)
 
 Trechos que dependem de confirmação da escola estão marcados com `CONFIRMAR COM A ESCOLA`.
+
+## Verificação
+
+```bash
+npm run build && npm run qa                                   # rolagem, dobra, axe, alvos, links (screenshots em qa/)
+node scripts/testar-formulario.mjs whatsapp http://localhost:4321   # com `npm run preview` rodando
+PUBLIC_FORM_ENDPOINT=https://formspree.io/f/teste npm run build && node scripts/testar-formulario.mjs endpoint http://localhost:4321
+node scripts/auditar-links.mjs                                # rótulo × destino de todos os links
+```
+
+## Pendências com a escola
+
+- Confirmar as idades de cada casa (`src/data/casas.ts`) e os textos de ambiente/rotina
+- Respostas da FAQ ainda ocultas (`publicar: false` em `src/data/faq.ts`): documentos para matrícula, período de adaptação, segurança e controle de acesso, calendário, equipe
+- Prazo médio de resposta e dias/horários de visita (`prazoResposta` e `diasVisita` em `src/data/site.ts`)
+- E-mail institucional e/ou conta no serviço de formulário (`PUBLIC_FORM_ENDPOINT`)
+- Razão social, CNPJ e canal formal para pedidos da LGPD; revisão jurídica da Política de Privacidade (incluindo prazo de guarda dos dados)
+- Fotos reais e diferentes entre si (casas, salas, áreas externas), com autorização de uso de imagem. Hoje só há duas fotos distintas; `grass-circle`, `creative-play` e `painting` são recortes da foto do hero
