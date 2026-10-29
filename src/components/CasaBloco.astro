@@ -1,0 +1,40 @@
+---
+import type { Casa } from '../data/casas';
+import { atividadesPara, turnos } from '../data/atividades';
+import { url } from '../lib/url';
+
+interface Props {
+  casa: Casa;
+}
+
+const { casa } = Astro.props;
+const atividades = atividadesPara(casa.turmas);
+---
+<article id={casa.id} class={`casa-bloco ${casa.cor}`} aria-labelledby={`${casa.id}-titulo`}>
+  <div class="casa-texto">
+    <h3 id={`${casa.id}-titulo`}>{casa.nome}</h3>
+    <p class="casa-idade"><strong>{casa.turma}</strong> · {casa.idade}</p>
+    <p>{casa.descricao}</p>
+    <h4>Atividades especiais</h4>
+    <dl class="casa-atividades">
+      {turnos.map((turno) => {
+        const doTurno = atividades.filter((a) => a.turno === turno);
+        return doTurno.length > 0 && (
+          <div>
+            <dt>{turno}</dt>
+            <dd>
+              {doTurno.map((a, i) => (
+                <>{a.nome}{a.frequencia && ` (${a.frequencia})`}{a.nota && ` — ${a.nota}`}{i < doTurno.length - 1 && ' · '}</>
+              ))}
+            </dd>
+          </div>
+        );
+      })}
+    </dl>
+    <div class="casa-acoes">
+      <a class="text-link" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <!-- Sem foto real das salas desta casa: bloco de cor da marca (pendência com a escola). -->
+  <div class="casa-cor" aria-hidden="true"><span class="scribble">{casa.nome}</span></div>
+</article>

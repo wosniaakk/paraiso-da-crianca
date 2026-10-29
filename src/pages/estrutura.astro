@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { url } from '../lib/url';
+import CasaBloco from '../components/CasaBloco.astro';
 import { casas } from '../data/casas';
 ---
 <BaseLayout title="Estrutura | Paraíso da Criança" description="Conheça os ambientes e as casas do Paraíso da Criança.">
@@ -32,10 +33,8 @@ import { casas } from '../data/casas';
         </div>
         <p>Conheça a organização das turmas por faixa etária.</p>
       </div>
-      <div class="house-grid">
-        {casas.map((casa) => (
-          <article id={casa.id} class={`house-card ${casa.cor}`}><div><h3>{casa.nome}</h3><p>{casa.turma}</p></div><a class="text-link" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a></article>
-        ))}
+      <div class="casa-lista">
+        {casas.map((casa) => <CasaBloco casa={casa} />)}
       </div>
     </div>
   </section>

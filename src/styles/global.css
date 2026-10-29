@@ -129,6 +129,29 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 .house-card p { color: var(--muted); margin-bottom: 0; }
 .house-card span { color: var(--red-dark); font-size: .82rem; font-weight: 900; }
 
+/* Blocos das casas (Estrutura) */
+.casa-lista { gap: 1.25rem; display: grid; }
+.casa-bloco { border-radius: var(--radius); background: var(--white); border: 1px solid var(--line); grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); display: grid; overflow: hidden; }
+.casa-texto { padding: clamp(1.5rem, 3.5vw, 2.4rem); }
+.casa-texto:before { content: ""; background: var(--red); border-radius: 99px; width: 55px; height: 8px; margin-bottom: 1.2rem; display: block; }
+.casa-bloco.blue .casa-texto:before, .casa-bloco.blue .casa-cor { background: var(--blue); }
+.casa-bloco.yellow .casa-texto:before, .casa-bloco.yellow .casa-cor { background: var(--yellow); }
+.casa-bloco.green .casa-texto:before, .casa-bloco.green .casa-cor { background: var(--green); }
+.casa-bloco.orange .casa-texto:before, .casa-bloco.orange .casa-cor { background: var(--orange); }
+.casa-bloco h3 { margin-bottom: .35rem; font-size: 1.75rem; }
+.casa-idade { color: var(--ink); font-size: 1.05rem; }
+.casa-texto > p { color: var(--muted); max-width: 560px; }
+.casa-texto > p.casa-idade { color: var(--ink); }
+.casa-texto h4 { color: var(--red-dark); text-transform: uppercase; letter-spacing: .12em; margin: 1.4rem 0 .6rem; font-size: .75rem; font-weight: 900; }
+.casa-atividades { gap: .55rem; margin: 0; display: grid; }
+.casa-atividades div { grid-template-columns: 5.5rem 1fr; gap: .75rem; display: grid; }
+.casa-atividades dt { font-weight: 800; }
+.casa-atividades dd { color: var(--muted); margin: 0; }
+.casa-acoes { flex-wrap: wrap; gap: .5rem 1.5rem; margin-top: .6rem; display: flex; }
+.casa-cor { color: var(--ink); place-items: center; min-height: 200px; display: grid; }
+.casa-bloco.green .casa-cor { color: var(--white); }
+.casa-cor .scribble { transform: rotate(-6deg); }
+
 /* Atividades */
 .activity-layout { grid-template-columns: .8fr 1.2fr; align-items: start; gap: clamp(2rem, 7vw, 8rem); display: grid; }
 .activity-list { border-top: 1px solid #ffffff40; grid-template-columns: repeat(2, 1fr); gap: 0; display: grid; }
@@ -200,7 +223,8 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
   .house-grid, .value-grid { grid-template-columns: repeat(2, 1fr); }
   .value-item:nth-child(2) { border-right: 0; }
   .value-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-  .visit-card, .pedagogy-grid { grid-template-columns: 1fr; }
+  .visit-card, .pedagogy-grid, .casa-bloco { grid-template-columns: 1fr; }
+  .casa-cor { min-height: 120px; order: -1; }
   .pedagogy-card:nth-child(2) { transform: none; }
 }
 
@@ -221,6 +245,7 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
   .value-item { border-right: 0; border-bottom: 1px solid var(--line); }
   .value-item:last-child { border-bottom: 0; }
   .activity-list { grid-template-columns: 1fr; }
+  .casa-atividades div { grid-template-columns: 1fr; gap: .1rem; }
   .page-intro { padding-top: 4.5rem; }
   .page-intro h1 { font-size: clamp(2.4rem, 11vw, 5rem); }
   .visit-card > div { padding: 2rem 1.4rem; }

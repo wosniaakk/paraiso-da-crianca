@@ -85,7 +85,7 @@ const whatsapp = `https://wa.me/${site.whatsappNumero}`;
       </div>
       <div class="house-grid">
         {casas.map((casa) => (
-          <a class={`house-card ${casa.cor}`} href={url(`/estrutura#${casa.id}`)}><div><h3>{casa.nome}</h3><p>{casa.turma}</p></div><span>Ver a casa {casa.nome} →</span></a>
+          <a class={`house-card ${casa.cor}`} href={url(`/estrutura#${casa.id}`)}><div><h3>{casa.nome}</h3><p>{casa.turma} · {casa.idade}</p></div><span>Ver a casa {casa.nome} →</span></a>
         ))}
       </div>
     </div>
