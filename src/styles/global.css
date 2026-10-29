@@ -231,6 +231,25 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 .faq details { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 1.15rem 1.2rem; }
 .faq summary { cursor: pointer; font-weight: 800; }
 .faq p { color: var(--muted); margin: .7rem 0 0; }
+.faq-tema { gap: .7rem; display: grid; }
+.faq-tema + .faq-tema { margin-top: 1.4rem; }
+.faq-tema h3 { color: var(--red-dark); text-transform: uppercase; letter-spacing: .12em; margin: 0; font-size: .8rem; font-weight: 900; }
+.faq-resposta { color: var(--muted); margin-top: .7rem; }
+.faq-resposta ul { margin: .5rem 0; padding-left: 1.2rem; }
+.faq-resposta a:not(.text-link) { color: var(--red-dark); font-weight: 800; }
+.faq-resposta .text-link { margin-top: .5rem; }
+.split-top { align-items: start; }
+.faq-chamada { color: var(--muted); margin: 2rem 0 0; }
+.passos { margin: 0; padding: 0; list-style: none; }
+.passos .pedagogy-card:nth-child(1) { background: var(--white); }
+
+/* Mapa com fachada */
+.mapa-fachada { border-radius: var(--radius); background: var(--white); border: 1px solid var(--line); aspect-ratio: 4/3; overflow: hidden; }
+.mapa-fachada iframe { border: 0; width: 100%; height: 100%; display: block; }
+.mapa-placeholder { text-align: center; background: radial-gradient(circle at 30% 30%, #edf4e9 0 22%, transparent 23%), radial-gradient(circle at 75% 70%, #fff3e9 0 18%, transparent 19%), var(--white); place-content: center; justify-items: center; gap: .9rem; height: 100%; padding: 1.5rem; display: grid; }
+.mapa-endereco { max-width: 320px; margin: 0; font-weight: 800; }
+.mapa-aviso { color: var(--muted); max-width: 340px; margin: 0; font-size: .85rem; }
+.mapa-placeholder .button { font: inherit; font-size: .9rem; font-weight: 800; cursor: pointer; border: 0; min-height: 48px; }
 
 /* Rodapé */
 .site-footer { color: var(--white); background: #262630; padding: 4rem 0 1.5rem; }

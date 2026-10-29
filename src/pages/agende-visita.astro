@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import VisitaForm from '../components/VisitaForm.astro';
+import Faq from '../components/Faq.astro';
+import MapaFachada from '../components/MapaFachada.astro';
 import { site } from '../data/site';
 import { whatsapp } from '../lib/whatsapp';
 ---
@@ -17,7 +19,7 @@ import { whatsapp } from '../lib/whatsapp';
     </Fragment>
   </PageIntro>
 
-  <section class="section section-white">
+  <section class="section section-white" id="formulario">
     <div class="container">
       <div class="visit-card">
         <div>
@@ -37,18 +39,43 @@ import { whatsapp } from '../lib/whatsapp';
     </div>
   </section>
 
-  <section class="section section-paper">
-    <div class="container split">
+  <section class="section section-paper" id="matricula">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Como funciona a matrícula</p>
+          <h2>Três passos até a matrícula.</h2>
+        </div>
+        <p>A secretaria acompanha cada etapa e explica os detalhes da matrícula.</p>
+      </div>
+      <ol class="pedagogy-grid passos">
+        <li class="pedagogy-card"><span class="value-number">01</span><h3>Converse com a secretaria</h3><p>Pelo WhatsApp, pelo telefone ou pelo formulário desta página. Conte a idade da criança e o período de interesse.</p></li>
+        <li class="pedagogy-card"><span class="value-number">02</span><h3>Agende e faça a visita</h3><p>Conheça os ambientes, a casa da faixa etária do seu filho e tire suas dúvidas com a equipe.</p></li>
+        <li class="pedagogy-card"><span class="value-number">03</span><h3>Confirme a matrícula</h3><p>A secretaria informa os valores, as condições e os próximos passos para a matrícula.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-white" id="perguntas-frequentes">
+    <div class="container split split-top">
       <div>
         <p class="kicker">Perguntas frequentes</p>
         <h2>Antes da visita.</h2>
-        <p class="lede">Se alguma dúvida ficar, a secretaria pode explicar tudo com calma pelo WhatsApp.</p>
+        <p class="lede">Se alguma dúvida ficar, a secretaria pode explicar tudo com calma pelo WhatsApp ou pelo telefone.</p>
       </div>
-      <div class="faq">
-        <details><summary>Para quais idades a escola atende?</summary><p>O Paraíso recebe crianças de 6 meses a 6 anos, organizadas nas casas Nuvem, Sol, Lua e Lagos e Espaço Estrela.</p></details>
-        <details><summary>Como agendo um horário?</summary><p>Envie uma mensagem pelo WhatsApp. A secretaria retorna para encontrar um horário de visita.</p></details>
-        <details><summary>Onde a escola fica?</summary><p>Estamos na Rua Des. Ernani G. Cartaxo, 564, no Capão Raso, em Curitiba.</p></details>
+      <Faq />
+    </div>
+  </section>
+
+  <section class="section section-paper" id="como-chegar">
+    <div class="container split">
+      <div>
+        <p class="kicker">Como chegar</p>
+        <h2>Onde estamos.</h2>
+        <p class="lede">{site.endereco}</p>
+        <a class="text-link" href={site.mapaHref} target="_blank" rel="noreferrer">Abrir no mapa <span aria-hidden="true">↗</span></a>
       </div>
+      <MapaFachada />
     </div>
   </section>
 </BaseLayout>

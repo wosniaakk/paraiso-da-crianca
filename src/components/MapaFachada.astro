@@ -1,0 +1,27 @@
+---
+// Mapa do Google carregado só quando a pessoa pede: até lá, nenhum cookie ou requisição de terceiros.
+import { site } from '../data/site';
+
+const embed = 'https://www.google.com/maps?q=Rua+Des.+Ernani+G.+Cartaxo,+564,+Capão+Raso,+Curitiba&output=embed';
+---
+<div class="mapa-fachada" data-embed={embed}>
+  <div class="mapa-placeholder">
+    <p class="mapa-endereco">{site.endereco}</p>
+    <button class="button" type="button">Carregar mapa</button>
+    <p class="mapa-aviso">O mapa é do Google. Ao carregar, o Google pode registrar dados da sua navegação.</p>
+  </div>
+</div>
+
+<script>
+  for (const fachada of document.querySelectorAll<HTMLElement>('.mapa-fachada')) {
+    fachada.querySelector('button')?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = fachada.dataset.embed!;
+      iframe.title = 'Mapa com a localização do Paraíso da Criança, na Rua Des. Ernani G. Cartaxo, 564, Capão Raso, Curitiba';
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer-when-downgrade';
+      fachada.replaceChildren(iframe);
+      iframe.focus();
+    });
+  }
+</script>
