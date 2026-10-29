@@ -41,7 +41,7 @@ a { color: inherit; }
 .desktop-nav a { color: var(--muted); white-space: nowrap; text-decoration: none; transition: color .2s; }
 .desktop-nav a:hover, .desktop-nav a.active { color: var(--red-dark); }
 .desktop-nav a.active { position: relative; }
-.desktop-nav a.active:after { content: ""; background: var(--red); border-radius: 5px; height: 3px; position: absolute; bottom: -.55rem; left: 0; right: 0; }
+.desktop-nav a.active:after { content: ""; background: var(--red); border-radius: 5px; height: 3px; position: absolute; bottom: .15rem; left: 0; right: 0; }
 .nav-cta, .button { background: var(--red-dark); color: var(--white); border-radius: 999px; justify-content: center; align-items: center; gap: .45rem; padding: .75rem 1.1rem; font-size: .9rem; font-weight: 800; text-decoration: none; transition: transform .2s, background .2s; display: inline-flex; box-shadow: 0 8px 16px #c923232e; }
 .nav-cta:hover, .button:hover { background: #aa1d1d; transform: translateY(-2px); }
 .button-light { color: var(--red-dark); background: var(--white); box-shadow: none; }
@@ -231,13 +231,13 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 
 /* FAQ */
 .faq { gap: .7rem; display: grid; }
-.faq details { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 1.15rem 1.2rem; }
-.faq summary { cursor: pointer; font-weight: 800; }
+.faq details { background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+.faq summary { cursor: pointer; border-radius: 14px; padding: 1.15rem 1.2rem; font-weight: 800; }
 .faq p { color: var(--muted); margin: .7rem 0 0; }
 .faq-tema { gap: .7rem; display: grid; }
 .faq-tema + .faq-tema { margin-top: 1.4rem; }
 .faq-tema h3 { color: var(--red-dark); text-transform: uppercase; letter-spacing: .12em; margin: 0; font-size: .8rem; font-weight: 900; }
-.faq-resposta { color: var(--muted); margin-top: .7rem; }
+.faq-resposta { color: var(--muted); padding: 0 1.2rem 1.15rem; }
 .faq-resposta ul { margin: .5rem 0; padding-left: 1.2rem; }
 .faq-resposta a:not(.text-link) { color: var(--red-dark); font-weight: 800; }
 .faq-resposta .text-link { margin-top: .5rem; }
@@ -262,10 +262,23 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 .footer-grid address, .footer-grid a, .footer-grid span { color: #ffffffb8; font-size: .92rem; font-style: normal; text-decoration: none; display: block; }
 .footer-grid address { margin-bottom: .65rem; }
 .footer-grid a + a, .footer-grid span + span { margin-top: .55rem; }
+.footer-grid a + a { margin-top: .4rem; }
 .footer-label { color: #ffdc58; letter-spacing: .12em; text-transform: uppercase; font-size: .75rem; font-weight: 900; }
 .footer-bottom { color: #ffffff73; border-top: 1px solid #ffffff29; justify-content: space-between; gap: 1rem; width: min(1180px, 100% - 2.5rem); padding-top: 1.1rem; font-size: .8rem; display: flex; }
 
+/* Alvos de toque (WCAG 2.5.8): pelo menos 24px no desktop e 44px no celular */
+.desktop-nav a, .text-link, .visit-detail a { align-items: center; min-height: 24px; display: inline-flex; }
+.desktop-nav a { min-height: 44px; }
+.footer-grid a { align-items: center; gap: .3em; width: fit-content; min-height: 32px; display: flex; }
+/* Links dentro de frases continuam inline; o padding vertical aumenta a área de toque sem mexer nas linhas */
+.prose a, .faq-resposta a:not(.text-link), .campo-dica a, .form-status a { padding-block: .25rem; }
+a[href^="tel:"] { white-space: nowrap; }
+.visit-detail a { width: fit-content; }
+
 @media (width <= 950px) {
+  .text-link, .visit-detail a, .footer-grid a { min-height: 44px; }
+  .prose a, .faq-resposta a:not(.text-link), .campo-dica a, .form-status a { padding-block: .8rem; }
+  .footer-grid a + a { margin-top: .25rem; }
   .desktop-nav, .nav-cta { display: none; }
   .mobile-menu { display: block; }
   .nav-whatsapp { display: grid; }
