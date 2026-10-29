@@ -2,6 +2,7 @@
 import type { Casa } from '../data/casas';
 import { atividadesPara, turnos } from '../data/atividades';
 import { url } from '../lib/url';
+import { whatsappCasa } from '../lib/whatsapp';
 
 interface Props {
   casa: Casa;
@@ -33,6 +34,7 @@ const atividades = atividadesPara(casa.turmas);
     </dl>
     <div class="casa-acoes">
       <a class="text-link" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a>
+      <a class="text-link" href={whatsappCasa(casa.nome)} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
     </div>
   </div>
   <!-- Sem foto real das salas desta casa: bloco de cor da marca (pendência com a escola). -->

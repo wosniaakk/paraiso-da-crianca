@@ -3,8 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
 import { casas } from '../data/casas';
 import { url } from '../lib/url';
+import { whatsapp as linkWhatsapp } from '../lib/whatsapp';
 
-const whatsapp = `https://wa.me/${site.whatsappNumero}`;
+const whatsapp = linkWhatsapp();
 ---
 <BaseLayout title="Educação Infantil com natureza e presença | Paraíso da Criança" description={site.tagline}>
   <section class="hero">

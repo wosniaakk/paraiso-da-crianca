@@ -29,7 +29,8 @@ const DOBRA = [
 const ALVO_MOBILE = 44;
 
 async function subirPreview() {
-  const proc = spawn('npx', ['astro', 'preview', '--port', String(PORTA)], { stdio: ['ignore', 'pipe', 'pipe'] });
+  // detached: o npx abre um processo filho; matamos o grupo inteiro no final.
+  const proc = spawn('npx', ['astro', 'preview', '--port', String(PORTA), '--ignore-lock'], { stdio: 'ignore', detached: true });
   const base = `http://localhost:${PORTA}`;
   for (let i = 0; i < 60; i++) {
     try {
@@ -38,7 +39,7 @@ async function subirPreview() {
     } catch {}
     await new Promise((r) => setTimeout(r, 500));
   }
-  proc.kill();
+  process.kill(-proc.pid);
   throw new Error('astro preview não respondeu');
 }
 
@@ -150,7 +151,7 @@ try {
   await page.context().close();
 } finally {
   await browser.close();
-  proc?.kill();
+  if (proc) process.kill(-proc.pid);
 }
 
 await mkdir(OUT, { recursive: true });

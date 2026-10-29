@@ -1,0 +1,154 @@
+---
+// Formulário curto de agendamento. O site é estático:
+// - com PUBLIC_FORM_ENDPOINT (Formspree, Web3Forms…), envia por POST e mostra o sucesso;
+// - sem a variável, monta a mensagem com os dados e abre o WhatsApp.
+import { site } from '../data/site';
+import { url } from '../lib/url';
+
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const chaveAcesso = import.meta.env.PUBLIC_FORM_ACCESS_KEY ?? '';
+const idades = ['6 meses a 1 ano', '1 ano', '2 anos', '3 anos', '4 anos', '5 anos'];
+const periodos = ['Manhã', 'Tarde', 'Intermediário', 'Integral'];
+---
+<form class="visita-form" id="visita-form" data-endpoint={endpoint} data-telefone={site.telefone} data-telefone-href={site.telefoneHref} novalidate>
+  {chaveAcesso && <input type="hidden" name="access_key" value={chaveAcesso} />}
+  <input type="hidden" name="assunto" value="Pedido de visita pelo site" />
+
+  <p class="form-aviso">Campos com <span aria-hidden="true">*</span><span class="sr-only">asterisco</span> são obrigatórios.</p>
+
+  <div class="campo">
+    <label for="f-nome">Seu nome <span aria-hidden="true">*</span></label>
+    <input id="f-nome" name="nome" type="text" autocomplete="name" required aria-describedby="f-nome-erro" />
+    <p class="campo-erro" id="f-nome-erro"></p>
+  </div>
+
+  <div class="campo">
+    <label for="f-telefone">Telefone com DDD <span aria-hidden="true">*</span></label>
+    <input id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="f-telefone-dica f-telefone-erro" />
+    <p class="campo-dica" id="f-telefone-dica">Ex.: (41) 99999-9999</p>
+    <p class="campo-erro" id="f-telefone-erro"></p>
+  </div>
+
+  <div class="campo-duplo">
+    <div class="campo">
+      <label for="f-idade">Idade da criança <span aria-hidden="true">*</span></label>
+      <select id="f-idade" name="idade" required aria-describedby="f-idade-erro">
+        <option value="">Selecione</option>
+        {idades.map((idade) => <option>{idade}</option>)}
+      </select>
+      <p class="campo-erro" id="f-idade-erro"></p>
+    </div>
+
+    <div class="campo">
+      <label for="f-periodo">Período preferido</label>
+      <select id="f-periodo" name="periodo">
+        <option value="">Ainda não sei</option>
+        {periodos.map((periodo) => <option>{periodo}</option>)}
+      </select>
+    </div>
+  </div>
+
+  <div class="campo">
+    <label for="f-horario">Melhor horário para retorno</label>
+    <input id="f-horario" name="horario" type="text" aria-describedby="f-horario-dica" />
+    <p class="campo-dica" id="f-horario-dica">Ex.: de manhã, depois das 14h</p>
+  </div>
+
+  <button class="button" type="submit" data-rotulo={endpoint ? 'Enviar pedido de visita' : 'Enviar pelo WhatsApp'}>
+    {endpoint ? 'Enviar pedido de visita' : <>Enviar pelo WhatsApp <span aria-hidden="true">↗</span><span class="sr-only"> (abre em nova aba)</span></>}
+  </button>
+  {!endpoint && <p class="campo-dica">Seus dados entram numa mensagem pronta no WhatsApp; é só confirmar o envio.</p>}
+  <p class="campo-dica">Usamos esses dados só para retornar seu contato. <a href={url('/privacidade')}>Política de privacidade</a></p>
+
+  <div class="form-status" role="status" aria-live="polite" hidden></div>
+</form>
+
+<script>
+  import { whatsapp } from '../lib/whatsapp';
+
+  const form = document.querySelector<HTMLFormElement>('#visita-form');
+  if (form) {
+    const endpoint = form.dataset.endpoint;
+    const telefone = form.dataset.telefone;
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const botao = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const rotuloOriginal = botao.innerHTML;
+
+    const regras: Record<string, (valor: string) => string> = {
+      nome: (v) => (v.trim().length >= 2 ? '' : 'Informe seu nome.'),
+      telefone: (v) => {
+        const digitos = v.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '');
+        return /^\d{10,11}$/.test(digitos) ? '' : 'Informe um telefone com DDD, por exemplo (41) 99999-9999.';
+      },
+      idade: (v) => (v ? '' : 'Selecione a idade da criança.'),
+    };
+
+    const validarCampo = (nome: string) => {
+      const campo = form.elements.namedItem(nome) as HTMLInputElement;
+      const erro = regras[nome](campo.value);
+      campo.setAttribute('aria-invalid', String(Boolean(erro)));
+      form.querySelector(`#f-${nome}-erro`)!.textContent = erro;
+      return erro ? campo : null;
+    };
+
+    for (const nome of Object.keys(regras)) {
+      const campo = form.elements.namedItem(nome) as HTMLInputElement;
+      // Revalida enquanto a pessoa corrige, mas só depois do primeiro erro.
+      campo.addEventListener('input', () => campo.getAttribute('aria-invalid') === 'true' && validarCampo(nome));
+      campo.addEventListener('change', () => campo.getAttribute('aria-invalid') === 'true' && validarCampo(nome));
+    }
+
+    const mostrarStatus = (tipo: 'sucesso' | 'erro', html: string) => {
+      status.hidden = false;
+      status.className = `form-status form-status-${tipo}`;
+      status.innerHTML = html;
+    };
+
+    const alternativa = `Não funcionou? Ligue para <a href="${form.dataset.telefoneHref}">${telefone}</a>.`;
+
+    form.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      const invalidos = Object.keys(regras).map(validarCampo).filter(Boolean);
+      if (invalidos.length) {
+        invalidos[0]!.focus();
+        return;
+      }
+
+      const dados = new FormData(form);
+      if (!endpoint) {
+        const texto = [
+          'Olá! Gostaria de agendar uma visita ao Paraíso da Criança.',
+          `Nome: ${dados.get('nome')}`,
+          `Telefone: ${dados.get('telefone')}`,
+          `Idade da criança: ${dados.get('idade')}`,
+          `Período de interesse: ${dados.get('periodo') || 'ainda não sei'}`,
+          dados.get('horario') ? `Melhor horário para retorno: ${dados.get('horario')}` : '',
+        ].filter(Boolean).join('\n');
+        // Sem o recurso "noopener" no window.open: com ele o retorno é sempre null e não daria para detectar bloqueio.
+        const janela = window.open(whatsapp(texto), '_blank');
+        if (janela) janela.opener = null;
+        mostrarStatus(
+          janela === null ? 'erro' : 'sucesso',
+          janela === null
+            ? `O navegador bloqueou a nova aba do WhatsApp. ${alternativa}`
+            : `Abrimos o WhatsApp em uma nova aba com a sua mensagem. É só tocar em enviar. ${alternativa}`,
+        );
+        return;
+      }
+
+      botao.disabled = true;
+      botao.textContent = 'Enviando…';
+      try {
+        const resposta = await fetch(endpoint, { method: 'POST', body: dados, headers: { Accept: 'application/json' } });
+        if (!resposta.ok) throw new Error(String(resposta.status));
+        form.reset();
+        mostrarStatus('sucesso', 'Recebemos seu pedido! A secretaria vai entrar em contato pelo telefone informado para combinar a visita.');
+      } catch {
+        mostrarStatus('erro', `Não conseguimos enviar seu pedido agora. ${alternativa}`);
+      } finally {
+        botao.disabled = false;
+        botao.innerHTML = rotuloOriginal;
+      }
+    });
+  }
+</script>

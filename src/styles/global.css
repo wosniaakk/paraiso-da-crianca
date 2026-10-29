@@ -27,6 +27,7 @@ a { color: inherit; }
 
 .skip-link { z-index: 20; background: var(--ink); color: var(--white); border-radius: 999px; padding: .65rem 1rem; position: fixed; top: -4rem; left: 1rem; }
 .skip-link:focus { top: 1rem; }
+.sr-only { clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; width: 1px; height: 1px; position: absolute; overflow: hidden; }
 
 .container { width: min(1180px, 100% - 2.5rem); margin: 0 auto; }
 .container.narrow { width: min(820px, 100% - 2.5rem); }
@@ -45,6 +46,8 @@ a { color: inherit; }
 .nav-cta:hover, .button:hover { background: #aa1d1d; transform: translateY(-2px); }
 .button-light { color: var(--red-dark); background: var(--white); box-shadow: none; }
 .button-light:hover { background: #fff7f1; }
+.button-outline { color: var(--white); box-shadow: none; background: none; border: 2px solid #ffffffb3; }
+.button-outline:hover { background: #ffffff1f; }
 .mobile-menu { margin-left: auto; display: none; }
 .mobile-menu summary { cursor: pointer; padding: .7rem 0; font-weight: 800; list-style: none; }
 .mobile-menu summary::-webkit-details-marker { display: none; }
@@ -166,6 +169,11 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 .page-intro-red h1 { color: var(--white); }
 .intro-copy { max-width: 680px; color: var(--muted); margin-bottom: 0; font-size: 1.2rem; }
 .page-intro-red .intro-copy { color: #ffffffe0; }
+.page-intro-compacto { padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(2.5rem, 4vw, 3.25rem); }
+.page-intro-compacto h1 { font-size: clamp(2.4rem, 5vw, 4.25rem); }
+.page-intro-compacto .intro-copy { font-size: 1.1rem; }
+.page-intro .hero-actions { margin-top: 1.6rem; }
+.intro-nota { color: #ffffffe0; max-width: 640px; margin: 1rem 0 0; font-size: .92rem; }
 
 /* Texto corrido */
 .prose { max-width: 760px; }
@@ -196,6 +204,26 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
 .visit-detail { gap: .15rem; display: grid; }
 .visit-detail strong { color: #ffdc58; letter-spacing: .1em; text-transform: uppercase; font-size: .75rem; }
 .visit-detail a { color: var(--white); font-size: 1.05rem; text-decoration: none; }
+.visit-card h2 + p { margin-bottom: 1.6rem; }
+
+/* Formulário de visita */
+.visita-form { gap: 1rem; display: grid; }
+.form-aviso, .campo-dica { color: #ffffffc2; margin: 0; font-size: .85rem; }
+.campo-dica a { color: var(--white); }
+.campo { gap: .3rem; display: grid; }
+.campo-duplo { grid-template-columns: 1fr 1fr; gap: 1rem; display: grid; }
+.campo label { font-weight: 800; }
+.campo input, .campo select { width: 100%; min-height: 48px; color: var(--ink); background: var(--white); font: inherit; border: 2px solid transparent; border-radius: 12px; padding: .6rem .8rem; }
+.campo input:focus-visible, .campo select:focus-visible { outline: 3px solid #ffeb99; outline-offset: 2px; }
+.campo [aria-invalid="true"] { border-color: #ffb3b3; box-shadow: 0 0 0 2px #ff6b6b; }
+.campo-erro { color: #ffc9c9; margin: 0; font-size: .88rem; font-weight: 700; }
+.campo-erro:empty { display: none; }
+.visita-form .button { font: inherit; font-size: .9rem; font-weight: 800; cursor: pointer; border: 0; justify-self: start; min-height: 48px; }
+.visita-form .button:disabled { opacity: .7; cursor: progress; transform: none; }
+.form-status { border-radius: 14px; padding: 1rem 1.1rem; font-weight: 700; }
+.form-status a { color: inherit; }
+.form-status-sucesso { color: var(--ink); background: #e5f3dd; }
+.form-status-erro { color: var(--ink); background: #ffe1dc; }
 .map-link { border: 1px solid #ffffff59; border-radius: 999px; margin-top: 1.4rem; padding: .7rem .95rem; font-weight: 800; text-decoration: none; display: inline-flex; }
 
 /* FAQ */
@@ -249,6 +277,7 @@ h3 { margin-bottom: .55rem; font-size: 1.32rem; }
   .page-intro { padding-top: 4.5rem; }
   .page-intro h1 { font-size: clamp(2.4rem, 11vw, 5rem); }
   .visit-card > div { padding: 2rem 1.4rem; }
+  .campo-duplo { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
   .footer-bottom { display: block; }
   .footer-bottom span + span { margin-top: .4rem; display: block; }

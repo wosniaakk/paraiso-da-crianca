@@ -1,10 +1,11 @@
 ---
-import { navegacao, site } from '../data/site';
+import { navegacao } from '../data/site';
+import { whatsapp as linkWhatsapp } from '../lib/whatsapp';
 import { url } from '../lib/url';
 
 const normalizar = (caminho: string) => caminho.replace(/\/$/, '') || '/';
 const atual = normalizar(Astro.url.pathname);
-const whatsapp = `https://wa.me/${site.whatsappNumero}`;
+const whatsapp = linkWhatsapp();
 const ativo = (href: string) => normalizar(url(href)) === atual;
 ---
 <header class="site-header">

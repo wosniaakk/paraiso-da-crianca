@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { site } from '../data/site';
+import { whatsapp } from '../lib/whatsapp';
 ---
 <BaseLayout title="Política de privacidade | Paraíso da Criança" description="Como o site do Paraíso da Criança trata dados de navegação e contato.">
   <PageIntro eyebrow="Transparência" title="Política de privacidade">
@@ -23,7 +24,7 @@ import { site } from '../data/site';
       <h2>Dados de navegação</h2>
       <p>O site é publicado como páginas estáticas. O provedor de hospedagem pode registrar dados técnicos básicos, como endereço IP, data e navegador, de acordo com suas próprias políticas e medidas de segurança.</p>
       <h2>Contato</h2>
-      <p>Para dúvidas sobre privacidade, fale diretamente com a secretaria pelo <a href={`https://wa.me/${site.whatsappNumero}`} target="_blank" rel="noreferrer">WhatsApp</a> ou pelo telefone <a href={site.telefoneHref}>{site.telefone}</a>.</p>
+      <p>Para dúvidas sobre privacidade, fale diretamente com a secretaria pelo <a href={whatsapp('Olá! Tenho uma dúvida sobre privacidade e o uso dos meus dados pelo Paraíso da Criança.')} target="_blank" rel="noreferrer">WhatsApp</a> ou pelo telefone <a href={site.telefoneHref}>{site.telefone}</a>.</p>
       <p><small>Última atualização: outubro de 2026.</small></p>
     </div>
   </section>

@@ -2,10 +2,14 @@
 export const site = {
   nome: 'Paraíso da Criança',
   tagline: 'Espaço que respira natureza e inspira a infância.',
-  telefone: '+55 41 3347-7341',
+  /** O mesmo número atende por telefone e WhatsApp. */
+  telefone: '(41) 3347-7341',
   telefoneHref: 'tel:+554133477341',
   whatsappNumero: '554133477341',
   atendimento: 'Segunda a sexta, das 7h15 às 18h45',
+  // CONFIRMAR COM A ESCOLA: enquanto forem null, esses itens ficam ocultos na página de agendamento.
+  prazoResposta: null as string | null,
+  diasVisita: null as string | null,
   endereco: 'Rua Des. Ernani G. Cartaxo, 564 — Capão Raso, Curitiba — PR',
   mapaHref:
     'https://www.google.com/maps/search/?api=1&query=Rua%20Des.%20Ernani%20G.%20Cartaxo%2C%20564%20%E2%80%94%20Cap%C3%A3o%20Raso%2C%20Curitiba%20%E2%80%94%20PR',
