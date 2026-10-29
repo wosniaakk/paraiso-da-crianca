@@ -15,7 +15,7 @@ const ativo = (href: string) => normalizar(url(href)) === atual;
         <a class:list={{ active: ativo(item.href) }} aria-current={ativo(item.href) ? 'page' : undefined} href={url(item.href)}>{item.label}</a>
       ))}
     </nav>
-    <a class="nav-cta" href={whatsapp} target="_blank" rel="noreferrer">Fale conosco <span aria-hidden="true">↗</span></a>
+    <a class="nav-cta" href={whatsapp} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
     <details class="mobile-menu">
       <summary aria-label="Abrir menu">Menu <span aria-hidden="true">☰</span></summary>
       <nav aria-label="Navegação móvel">

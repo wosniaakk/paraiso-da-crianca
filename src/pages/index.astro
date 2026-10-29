@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
+import { casas } from '../data/casas';
 import { url } from '../lib/url';
 
 const whatsapp = `https://wa.me/${site.whatsappNumero}`;
@@ -14,8 +15,8 @@ const whatsapp = `https://wa.me/${site.whatsappNumero}`;
         <h1>Crescer com tempo para descobrir.</h1>
         <p class="hero-copy">Um lugar de vínculo, movimento e curiosidade, onde cada criança encontra espaço para brincar, conviver, explorar e se expressar.</p>
         <div class="hero-actions">
-          <a class="button" href={url('/agende-visita')}>Conheça a escola <span aria-hidden="true">↗</span></a>
-          <a class="button button-light" href={whatsapp} target="_blank" rel="noreferrer">Conversar no WhatsApp</a>
+          <a class="button" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a>
+          <a class="button button-light" href={whatsapp} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>
@@ -28,7 +29,7 @@ const whatsapp = `https://wa.me/${site.whatsappNumero}`;
         <p class="kicker">Um jeito de estar no mundo</p>
         <h2>Uma infância de brincadeiras e descobertas.</h2>
         <p class="lede">No Paraíso, o ambiente participa da aprendizagem. A criança tem tempo para observar, inventar, perguntar e voltar àquilo que ainda quer descobrir.</p>
-        <a class="text-link" href={url('/proposta-pedagogica')}>Ver a proposta pedagógica <span aria-hidden="true">→</span></a>
+        <a class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica <span aria-hidden="true">→</span></a>
       </div>
       <div class="photo-stack">
         <figure class="photo-card"><img src={url('/images/grass-circle.webp')} alt="Crianças deitadas na grama, sorrindo" loading="lazy" /><span class="photo-label">Nossa escola</span></figure>
@@ -60,7 +61,7 @@ const whatsapp = `https://wa.me/${site.whatsappNumero}`;
         <p class="kicker">No cotidiano</p>
         <h2>Aprender também é fazer.</h2>
         <p class="lede">Música, movimento, arte, natureza e tecnologia entram na rotina com intencionalidade e leveza.</p>
-        <a class="text-link" href={url('/estrutura')}>Conheça os espaços <span aria-hidden="true">→</span></a>
+        <a class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica <span aria-hidden="true">→</span></a>
       </div>
       <ul class="activity-list">
         <li>Musicalização infantil</li>
@@ -83,10 +84,9 @@ const whatsapp = `https://wa.me/${site.whatsappNumero}`;
         <p>Ambientes pensados para acompanhar a criança dos 6 meses aos 6 anos.</p>
       </div>
       <div class="house-grid">
-        <a class="house-card blue" href={url('/estrutura#casas')}><div><h3>Nuvem</h3><p>Berçário</p></div><span>Conhecer esta fase →</span></a>
-        <a class="house-card yellow" href={url('/estrutura#casas')}><div><h3>Sol</h3><p>Maternal 1</p></div><span>Conhecer esta fase →</span></a>
-        <a class="house-card green" href={url('/estrutura#casas')}><div><h3>Lua e Lagos</h3><p>Maternal 2</p></div><span>Conhecer esta fase →</span></a>
-        <a class="house-card orange" href={url('/estrutura#casas')}><div><h3>Espaço Estrela</h3><p>Níveis 3, 4 e 5</p></div><span>Conhecer esta fase →</span></a>
+        {casas.map((casa) => (
+          <a class={`house-card ${casa.cor}`} href={url(`/estrutura#${casa.id}`)}><div><h3>{casa.nome}</h3><p>{casa.turma}</p></div><span>Ver a casa {casa.nome} →</span></a>
+        ))}
       </div>
     </div>
   </section>

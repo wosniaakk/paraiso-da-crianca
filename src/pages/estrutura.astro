@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { url } from '../lib/url';
+import { casas } from '../data/casas';
 ---
 <BaseLayout title="Estrutura | Paraíso da Criança" description="Conheça os ambientes e as casas do Paraíso da Criança.">
   <PageIntro eyebrow="Estrutura" title="Ambientes que dão vontade de ficar.">
@@ -32,10 +33,9 @@ import { url } from '../lib/url';
         <p>Conheça a organização das turmas por faixa etária.</p>
       </div>
       <div class="house-grid">
-        <article id="casa-nuvem" class="house-card blue"><div><h3>Nuvem</h3><p>Berçário</p></div><a class="text-link" href={url('/agende-visita')}>Entre em contato <span aria-hidden="true">→</span></a></article>
-        <article id="casa-sol" class="house-card yellow"><div><h3>Sol</h3><p>Maternal 1</p></div><a class="text-link" href={url('/agende-visita')}>Entre em contato <span aria-hidden="true">→</span></a></article>
-        <article id="casa-lua-e-lagos" class="house-card green"><div><h3>Lua e Lagos</h3><p>Maternal 2</p></div><a class="text-link" href={url('/agende-visita')}>Entre em contato <span aria-hidden="true">→</span></a></article>
-        <article id="casa-espaço-estrela" class="house-card orange"><div><h3>Espaço Estrela</h3><p>Níveis 3, 4 e 5</p></div><a class="text-link" href={url('/agende-visita')}>Entre em contato <span aria-hidden="true">→</span></a></article>
+        {casas.map((casa) => (
+          <article id={casa.id} class={`house-card ${casa.cor}`}><div><h3>{casa.nome}</h3><p>{casa.turma}</p></div><a class="text-link" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a></article>
+        ))}
       </div>
     </div>
   </section>
