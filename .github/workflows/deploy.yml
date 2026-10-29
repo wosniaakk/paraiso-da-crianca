@@ -1,0 +1,38 @@
+# Publica o site no GitHub Pages a cada push na main.
+# Em Settings → Pages, escolha "GitHub Actions" como fonte.
+name: Deploy no GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Opcionais: Settings → Secrets and variables → Actions → Variables (ver README)
+      PUBLIC_FORM_ENDPOINT: ${{ vars.PUBLIC_FORM_ENDPOINT }}
+      PUBLIC_FORM_ACCESS_KEY: ${{ vars.PUBLIC_FORM_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

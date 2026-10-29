@@ -1,0 +1,22 @@
+---
+// O GitHub Pages serve dist/404.html para qualquer endereço inexistente.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Link from '../components/Link.astro';
+import { url } from '../lib/url';
+---
+<BaseLayout title="Página não encontrada | Paraíso da Criança" description="Esta página não existe ou mudou de endereço." cta={false} indexar={false}>
+  <PageIntro eyebrow="Erro 404" title="Não encontramos esta página">
+    O endereço pode ter mudado ou estar digitado de outro jeito. Escolha um dos caminhos abaixo para continuar.
+  </PageIntro>
+
+  <section class="section section-white">
+    <div class="container narrow">
+      <ul class="links-404">
+        <li><Link class="text-link" href={url('/')}>Início</Link></li>
+        <li><Link class="text-link" href={url('/estrutura')}>Estrutura</Link></li>
+        <li><Link class="text-link" href={url('/agende-visita')}>Agendar uma visita</Link></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

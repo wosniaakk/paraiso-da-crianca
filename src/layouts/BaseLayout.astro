@@ -10,9 +10,11 @@ interface Props {
   description: string;
   /** Mostra a chamada para visita antes do rodapé. */
   cta?: boolean;
+  /** false para páginas que não devem aparecer em buscadores (404). */
+  indexar?: boolean;
 }
 
-const { title, description, cta = true } = Astro.props;
+const { title, description, cta = true, indexar = true } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(url('/images/hero-garden.webp'), Astro.site);
 ---
@@ -23,7 +25,8 @@ const ogImage = new URL(url('/images/hero-garden.webp'), Astro.site);
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#f92828" />
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {!indexar && <meta name="robots" content="noindex" />}
+    {indexar && <link rel="canonical" href={canonical} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
