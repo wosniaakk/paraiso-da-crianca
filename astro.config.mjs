@@ -6,5 +6,6 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://edu-rdp.github.io',
   base: '/',
-  build: { format: 'directory' },
+  // CSS embutido no HTML: um pedido a menos bloqueando a primeira renderização.
+  build: { format: 'directory', inlineStylesheets: 'always' },
 });

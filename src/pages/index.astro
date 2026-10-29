@@ -11,7 +11,7 @@ import Link from '../components/Link.astro';
 ---
 <BaseLayout title="Educação Infantil com natureza e presença | Paraíso da Criança" description={site.tagline}>
   <section class="hero">
-    <div class="hero-media"><img src={url(fotos.heroJardim.src)} alt={fotos.heroJardim.alt} /></div>
+    <div class="hero-media"><img src={url(fotos.heroJardim.src)} alt={fotos.heroJardim.alt} fetchpriority="high" /></div>
     <div class="hero-content">
       <div class="container">
         <p class="eyebrow">Primeira infância • 6 meses a 6 anos</p>
