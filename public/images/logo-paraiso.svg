@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1244" height="898" viewBox="0 0 1244 898" role="img" aria-labelledby="title desc">
+  <title id="title">Paraíso da Criança — Educação Infantil</title>
+  <desc id="desc">Reconstrução vetorial plana e editável do logotipo de Paraíso da Criança. Não é uma reprodução oficial.</desc>
+  <defs>
+    <style>
+      .outline { stroke:#303030; stroke-linecap:round; stroke-linejoin:round; }
+      .red-line { stroke:#d73838; stroke-linecap:round; stroke-linejoin:round; }
+    </style>
+  </defs>
+
+  <!-- Outer red frame -->
+  <circle cx="622" cy="449" r="403" fill="#fff" stroke="#f31b24" stroke-width="30"/>
+
+  <!-- Three colored body/bridge arcs. A dark under-stroke keeps the silhouette legible at small sizes. -->
+  <path d="M 400 445 C 400 404 423 367 463 344" fill="none" class="outline" stroke-width="27"/>
+  <path d="M 400 445 C 400 404 423 367 463 344" fill="none" stroke="#f47c19" stroke-width="18"/>
+  <path d="M 555 345 C 589 362 612 399 620 445" fill="none" class="outline" stroke-width="27"/>
+  <path d="M 555 345 C 589 362 612 399 620 445" fill="none" stroke="#f47c19" stroke-width="18"/>
+  <path d="M 620 444 C 622 398 655 357 699 356 C 745 355 776 386 779 444" fill="none" class="outline" stroke-width="28"/>
+  <path d="M 620 444 C 622 398 655 357 699 356 C 745 355 776 386 779 444" fill="none" stroke="#78ce4b" stroke-width="19"/>
+  <path d="M 779 444 C 780 407 806 381 838 381 C 871 381 894 406 895 444" fill="none" class="outline" stroke-width="27"/>
+  <path d="M 779 444 C 780 407 806 381 838 381 C 871 381 894 406 895 444" fill="none" stroke="#35aee5" stroke-width="18"/>
+
+  <!-- Green segment under the head -->
+  <path d="M 451 349 C 460 376 482 393 510 394 C 539 393 559 376 568 349 C 587 366 593 390 581 407 C 559 433 474 433 445 405 C 434 390 439 366 451 349 Z" fill="#70ce40" stroke="#2e3030" stroke-width="5"/>
+
+  <!-- Caterpillar head -->
+  <path d="M 455 228 C 466 209 480 204 496 205 C 513 205 527 211 539 228 C 550 243 566 250 579 264 C 594 282 596 304 585 322 C 576 338 561 346 544 352 C 529 360 508 363 487 359 C 463 357 440 346 424 334 C 408 323 402 305 406 287 C 409 271 419 260 434 252 C 444 246 449 237 455 228 Z" fill="#fff" class="red-line" stroke-width="8"/>
+
+  <!-- Antennae -->
+  <path d="M 464 240 C 467 223 465 210 457 198" fill="none" class="red-line" stroke-width="7"/>
+  <path d="M 529 234 C 529 216 536 201 547 190" fill="none" class="red-line" stroke-width="7"/>
+  <circle cx="454" cy="191" r="15" fill="#ffd20a" stroke="#333" stroke-width="4"/>
+  <circle cx="549" cy="184" r="15" fill="#ffd20a" stroke="#333" stroke-width="4"/>
+
+  <!-- Friendly face -->
+  <ellipse cx="478" cy="283" rx="14" ry="24" fill="#c93737"/>
+  <ellipse cx="531" cy="283" rx="14" ry="24" fill="#c93737"/>
+  <ellipse cx="483" cy="289" rx="4.2" ry="9" fill="#fff"/>
+  <ellipse cx="536" cy="289" rx="4.2" ry="9" fill="#fff"/>
+  <path d="M 456 313 C 470 322 483 327 500 328 C 518 328 534 322 548 312" fill="none" class="red-line" stroke-width="5"/>
+  <path d="M 474 326 C 482 344 517 348 529 326 C 516 333 486 333 474 326 Z" fill="#fff" class="red-line" stroke-width="5"/>
+  <circle cx="458" cy="315" r="4" fill="#c93737"/>
+  <circle cx="548" cy="314" r="4" fill="#c93737"/>
+
+  <!-- Simplified lettering keeps the wordmark legible at header and footer sizes. -->
+  <text x="622" y="560" text-anchor="middle" font-family="Trebuchet MS, Arial, sans-serif" font-size="104" font-weight="700" letter-spacing="-5" fill="#e84a50" stroke="#a91e28" stroke-width="3" paint-order="stroke fill">Paraíso</text>
+  <text x="622" y="660" text-anchor="middle" font-family="Trebuchet MS, Arial, sans-serif" font-size="82" font-weight="700" letter-spacing="-3" fill="#e84a50" stroke="#a91e28" stroke-width="3" paint-order="stroke fill">da Criança</text>
+  <text x="622" y="735" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="600" letter-spacing="4" fill="#151515">EDUCAÇÃO INFANTIL</text>
+</svg>

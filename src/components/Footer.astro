@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site';
+import { url } from '../lib/url';
+---
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <img class="footer-logo" src={url('/images/logo-paraiso.svg')} alt="Paraíso da Criança" />
+      <p class="footer-tagline">{site.tagline}</p>
+    </div>
+    <div>
+      <p class="footer-label">Visite a gente</p>
+      <address>{site.endereco}</address>
+      <a href={site.telefoneHref}>{site.telefone}</a>
+      <span>{site.atendimento}</span>
+    </div>
+    <div>
+      <p class="footer-label">Para acompanhar</p>
+      <a href={site.instagram} target="_blank" rel="noreferrer">Instagram ↗</a>
+      <a href={site.facebook} target="_blank" rel="noreferrer">Facebook ↗</a>
+      <a href={url('/privacidade')}>Privacidade</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Paraíso da Criança</span>
+    <span>Educação Infantil desde 2002</span>
+  </div>
+</footer>

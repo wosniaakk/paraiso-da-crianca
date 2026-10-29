@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { site } from '../data/site';
+---
+<BaseLayout title="Política de privacidade | Paraíso da Criança" description="Como o site do Paraíso da Criança trata dados de navegação e contato.">
+  <PageIntro eyebrow="Transparência" title="Política de privacidade">
+    Esta página explica, em linguagem simples, o que acontece quando você navega pelo site ou entra em contato com a escola.
+  </PageIntro>
+
+  <section class="section section-paper">
+    <div class="container prose">
+      <h2>Fontes tipográficas</h2>
+      <p>Para manter a identidade visual, o site solicita as fontes Nunito e Caveat ao Google Fonts. Essa requisição pode transmitir dados técnicos básicos, como endereço IP, ao provedor da fonte, de acordo com as políticas dele.</p>
+    </div>
+  </section>
+
+  <section class="section section-white">
+    <div class="container prose">
+      <p>O site institucional do Paraíso da Criança apresenta informações sobre a escola e oferece um link para conversa direta com a secretaria pelo WhatsApp. Não há cadastro de visitantes, formulário próprio, cookies de publicidade ou ferramentas de análise instaladas nesta versão.</p>
+      <h2>Quando você fala com a escola</h2>
+      <p>Ao clicar no WhatsApp, você será direcionado para o serviço da Meta. A conversa e os dados enviados passam a seguir as políticas e os termos desse serviço. A escola pode receber informações que você escolher compartilhar, como nome, telefone e idade da criança, para responder à sua solicitação.</p>
+      <h2>Dados de navegação</h2>
+      <p>O site é publicado como páginas estáticas. O provedor de hospedagem pode registrar dados técnicos básicos, como endereço IP, data e navegador, de acordo com suas próprias políticas e medidas de segurança.</p>
+      <h2>Contato</h2>
+      <p>Para dúvidas sobre privacidade, fale diretamente com a secretaria pelo <a href={`https://wa.me/${site.whatsappNumero}`} target="_blank" rel="noreferrer">WhatsApp</a> ou pelo telefone <a href={site.telefoneHref}>{site.telefone}</a>.</p>
+      <p><small>Última atualização: outubro de 2026.</small></p>
+    </div>
+  </section>
+</BaseLayout>

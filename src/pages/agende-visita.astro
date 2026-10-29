@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { site } from '../data/site';
+
+const whatsapp = `https://wa.me/${site.whatsappNumero}`;
+---
+<BaseLayout title="Agende sua visita | Paraíso da Criança" description="Entre em contato e agende uma visita ao Paraíso da Criança.">
+  <PageIntro eyebrow="Agende sua visita" title="Venha conhecer o nosso jeito de cuidar.">
+    A secretaria conversa com você pelo WhatsApp, entende o momento da sua família e combina o melhor horário para a visita.
+  </PageIntro>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="visit-card">
+        <div>
+          <p class="kicker">Primeiro passo</p>
+          <h2>Uma conversa simples pode começar uma grande história.</h2>
+          <p>Escreva para a secretaria com a idade da criança e o período de interesse. A equipe retorna para combinar a visita e responder suas dúvidas.</p>
+          <a class="button" href={whatsapp} target="_blank" rel="noreferrer">Abrir conversa no WhatsApp ↗</a>
+        </div>
+        <div class="visit-details">
+          <div class="visit-detail"><strong>Telefone</strong><a href={site.telefoneHref}>{site.telefone}</a></div>
+          <div class="visit-detail"><strong>Horário de atendimento</strong><span>{site.atendimento}</span></div>
+          <div class="visit-detail"><strong>Endereço</strong><span>{site.endereco}</span><a class="map-link" href={site.mapaHref} target="_blank" rel="noreferrer">Abrir no mapa ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-paper">
+    <div class="container split">
+      <div>
+        <p class="kicker">Perguntas frequentes</p>
+        <h2>Antes da visita.</h2>
+        <p class="lede">Se alguma dúvida ficar, a secretaria pode explicar tudo com calma pelo WhatsApp.</p>
+      </div>
+      <div class="faq">
+        <details><summary>Para quais idades a escola atende?</summary><p>O Paraíso recebe crianças de 6 meses a 6 anos, organizadas nas casas Nuvem, Sol, Lua e Lagos e Espaço Estrela.</p></details>
+        <details><summary>Como agendo um horário?</summary><p>Envie uma mensagem pelo WhatsApp. A secretaria retorna para encontrar um horário de visita.</p></details>
+        <details><summary>Onde a escola fica?</summary><p>Estamos na Rua Des. Ernani G. Cartaxo, 564, no Capão Raso, em Curitiba.</p></details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

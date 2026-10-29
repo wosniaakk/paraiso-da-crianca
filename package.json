@@ -1,0 +1,19 @@
+{
+  "name": "paraiso-da-crianca",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "qa": "node scripts/qa.mjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "playwright": "^1.64.1"
+  },
+  "dependencies": {
+    "astro": "^7.4.4"
+  }
+}

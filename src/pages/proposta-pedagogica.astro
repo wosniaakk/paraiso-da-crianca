@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+
+const descricao = 'Nossa prática pedagógica parte dos direitos da criança e de territórios amplos de aprendizagem. O cotidiano combina acolhimento, investigação, autonomia e presença adulta atenta.';
+---
+<BaseLayout title="Proposta pedagógica | Paraíso da Criança" description={descricao}>
+  <PageIntro eyebrow="Proposta pedagógica" title="A aprendizagem nasce do encontro.">{descricao}</PageIntro>
+
+  <section class="section section-white">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="kicker">Como acontece</p>
+          <h2>Experiências que deixam marcas.</h2>
+        </div>
+        <p>O professor observa, documenta, organiza convites e aprende junto com as crianças.</p>
+      </div>
+      <div class="pedagogy-grid">
+        <article class="pedagogy-card"><span class="value-number">01</span><h3>Projetos com sentido</h3><p>Perguntas das crianças orientam percursos que podem passar pelo jardim, pelo ateliê, pela cozinha ou pela roda de conversa.</p></article>
+        <article class="pedagogy-card"><span class="value-number">02</span><h3>Ambientes que convidam</h3><p>Materiais acessíveis e espaços internos e externos ajudam cada criança a fazer escolhas, testar ideias e construir hipóteses.</p></article>
+        <article class="pedagogy-card"><span class="value-number">03</span><h3>Família por perto</h3><p>A relação com as famílias é parte do cuidado: escuta, diálogo e continuidade tornam a experiência mais segura.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-paper">
+    <div class="container split">
+      <div>
+        <p class="kicker">Territórios de aprendizagem</p>
+        <h2>O mundo é o nosso material.</h2>
+        <p class="lede">A natureza, os objetos, o corpo, os sons e as histórias ampliam as possibilidades de brincar e investigar. Projetos podem começar com uma folha, um inseto, uma pergunta ou uma hipótese e ganhar novas formas na conversa com o grupo.</p>
+      </div>
+      <div class="feature-list">
+        <article class="feature-card"><h3>Brincar e descobrir</h3><p>O brincar sustenta a imaginação, as relações e o pensamento.</p></article>
+        <article class="feature-card"><h3>Interagir e construir</h3><p>As crianças criam sentido quando podem fazer junto, comparar e transformar.</p></article>
+        <article class="feature-card"><h3>Registrar e compartilhar</h3><p>Registros tornam visíveis os processos e aproximam as famílias do cotidiano.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-red">
+    <div class="container activity-layout">
+      <div>
+        <p class="kicker">Vivências</p>
+        <h2>Aprender, criar e se expressar.</h2>
+        <p class="lede">Aulas especiais, música, inglês, arte, movimento, robótica e educação socioambiental complementam a experiência de cada turma.</p>
+      </div>
+      <ul class="activity-list">
+        <li>Musicalização infantil</li>
+        <li>Yoga e movimento</li>
+        <li>Inglês para os níveis 3, 4 e 5</li>
+        <li>Robótica e cultura maker</li>
+        <li>Educação socioambiental</li>
+        <li>Arte, teatro e oficinas recreativas</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

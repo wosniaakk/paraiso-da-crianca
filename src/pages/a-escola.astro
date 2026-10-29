@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { url } from '../lib/url';
+---
+<BaseLayout title="A escola | Paraíso da Criança" description="A história e os valores do Paraíso da Criança.">
+  <PageIntro eyebrow="A escola" title="Uma escola viva, afetiva e curiosa.">
+    Desde 2002, o Paraíso da Criança acompanha os primeiros anos com cuidado, escuta e confiança no potencial de cada criança.
+  </PageIntro>
+
+  <section class="section section-white">
+    <div class="container split">
+      <div class="prose">
+        <p>O Paraíso nasceu do desejo de construir uma escola de educação infantil onde a infância pudesse acontecer com inteireza. Ao longo dos anos, essa história foi sendo feita por muitas mãos: crianças, famílias, educadores e uma equipe que acredita na força dos vínculos.</p>
+        <p>Hoje, recebemos crianças de 6 meses a 6 anos em ambientes que convidam ao movimento, à investigação e à convivência. A rotina tem estrutura e também espaço para o inesperado que uma boa pergunta pode abrir.</p>
+        <blockquote class="quote">“Toda descoberta começa quando alguém tem tempo para olhar de novo.”</blockquote>
+      </div>
+      <figure class="photo-card tall"><img src={url('/images/hero-garden.webp')} alt="Duas crianças exploram uma planta no jardim" loading="lazy" /><span class="photo-label">Curiosidade em movimento</span></figure>
+    </div>
+  </section>
+
+  <section class="section section-paper">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="kicker">O que orienta nosso trabalho</p>
+          <h2>Valores que aparecem no dia a dia.</h2>
+        </div>
+        <p>Mais do que frases na parede, são escolhas concretas de cuidado e convivência.</p>
+      </div>
+      <div class="feature-list">
+        <article class="feature-card"><h3>Relações de confiança</h3><p>Acolher a criança e sua família com presença, previsibilidade e abertura para o diálogo.</p></article>
+        <article class="feature-card"><h3>Autonomia acompanhada</h3><p>Oferecer possibilidades reais de escolha, com adultos atentos para apoiar sem antecipar todos os caminhos.</p></article>
+        <article class="feature-card"><h3>Respeito pela infância</h3><p>Reconhecer o brincar, o corpo, a imaginação e as diferentes formas de expressão como parte da aprendizagem.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-red">
+    <div class="container split">
+      <div>
+        <p class="kicker">Para famílias</p>
+        <h2>Parceria que continua para além do portão.</h2>
+      </div>
+      <p class="lede">A comunicação próxima ajuda a escola e a família a construírem juntas uma experiência coerente, cuidadosa e significativa para a criança.</p>
+    </div>
+  </section>
+</BaseLayout>
