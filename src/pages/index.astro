@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../data/site';
 import { casas } from '../data/casas';
+import { fotos } from '../data/fotos';
 import { url } from '../lib/url';
 import { whatsapp as linkWhatsapp } from '../lib/whatsapp';
 
@@ -10,7 +11,7 @@ import Link from '../components/Link.astro';
 ---
 <BaseLayout title="Educação Infantil com natureza e presença | Paraíso da Criança" description={site.tagline}>
   <section class="hero">
-    <div class="hero-media"><img src={url('/images/hero-garden.webp')} alt="Duas crianças observam uma planta no jardim da escola" /></div>
+    <div class="hero-media"><img src={url(fotos.heroJardim.src)} alt={fotos.heroJardim.alt} /></div>
     <div class="hero-content">
       <div class="container">
         <p class="eyebrow">Primeira infância • 6 meses a 6 anos</p>
@@ -22,7 +23,6 @@ import Link from '../components/Link.astro';
         </div>
       </div>
     </div>
-    <p class="hero-note scribble">cada descoberta importa</p>
   </section>
 
   <section class="section section-white">
@@ -34,7 +34,7 @@ import Link from '../components/Link.astro';
         <Link class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica</Link>
       </div>
       <div class="photo-stack">
-        <figure class="photo-card"><img src={url('/images/grass-circle.webp')} alt="Crianças deitadas na grama, sorrindo" loading="lazy" /><span class="photo-label">Nossa escola</span></figure>
+        <div class="bloco-cor bloco-cor-largo" aria-hidden="true"><span class="scribble">brincar é descobrir</span></div>
       </div>
     </div>
   </section>
@@ -66,12 +66,10 @@ import Link from '../components/Link.astro';
         <Link class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica</Link>
       </div>
       <ul class="activity-list">
-        <li>Musicalização infantil</li>
-        <li>Yoga e movimento</li>
-        <li>Inglês para os níveis 3, 4 e 5</li>
-        <li>Robótica e cultura maker</li>
-        <li>Educação socioambiental</li>
-        <li>Arte, teatro e oficinas recreativas</li>
+        <li>Musicalização do Berçário ao Nível 5</li>
+        <li>Quintais Brincantes ao ar livre</li>
+        <li>Inglês CNA para os Níveis 3 a 5</li>
+        <li>Robótica para os Níveis 4 e 5</li>
       </ul>
     </div>
   </section>
@@ -95,9 +93,7 @@ import Link from '../components/Link.astro';
 
   <section class="section section-paper">
     <div class="container split split-reverse">
-      <div class="photo-stack">
-        <figure class="photo-card tall"><img src={url('/images/painting.webp')} alt="Criança pinta com as mãos ao ar livre" loading="lazy" /><span class="photo-label">Mãos na massa</span></figure>
-      </div>
+      <div class="bloco-cor bloco-cor-laranja" aria-hidden="true"><span class="scribble">desde 2002</span></div>
       <div>
         <p class="kicker">Desde 2002</p>
         <h2>Uma história feita de presença.</h2>

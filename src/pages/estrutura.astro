@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
+import Foto from '../components/Foto.astro';
+import { fotos } from '../data/fotos';
 import { url } from '../lib/url';
 import CasaBloco from '../components/CasaBloco.astro';
 import { casas } from '../data/casas';
@@ -14,7 +16,7 @@ import Link from '../components/Link.astro';
   <section class="section section-white">
     <div class="container split">
       <div class="photo-stack">
-        <figure class="photo-card"><img src={url('/images/music.webp')} alt="Bebê explora as cordas de um violão" loading="lazy" /><span class="photo-label">Descobertas pela música</span></figure>
+        <Foto foto={fotos.musica} />
       </div>
       <div>
         <p class="kicker">Dentro e fora</p>
@@ -43,7 +45,8 @@ import Link from '../components/Link.astro';
 
   <section class="section section-white">
     <div class="container split split-reverse">
-      <figure class="photo-card tall"><img src={url('/images/grass-circle.webp')} alt="Crianças brincam juntas na grama" loading="lazy" /><span class="photo-label">Natureza que inspira</span></figure>
+      <!-- Sem foto própria das áreas externas (a do gramado já está na Home): bloco de cor da marca. -->
+      <div class="bloco-cor" aria-hidden="true"><span class="scribble">ao ar livre</span></div>
       <div>
         <p class="kicker">O lado de fora</p>
         <h2>Quando o jardim vira pergunta.</h2>

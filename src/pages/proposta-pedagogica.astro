@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import { url } from '../lib/url';
+import { atividades, turnos } from '../data/atividades';
 
 const descricao = 'Nossa prática pedagógica parte dos direitos da criança e de territórios amplos de aprendizagem. O cotidiano combina acolhimento, investigação, autonomia e presença adulta atenta.';
 import Link from '../components/Link.astro';
@@ -47,16 +48,25 @@ import Link from '../components/Link.astro';
         <p class="kicker">Vivências</p>
         <h2>Aprender, criar e se expressar.</h2>
         <p class="lede">Aulas especiais, música, inglês, arte, movimento, robótica e educação socioambiental complementam a experiência de cada turma.</p>
+        <p class="lede">O material pedagógico é a Coleção “FAÇA”, da FTD, baseada na abordagem de Reggio Emilia: cultura maker, metodologias ativas, educação socioemocional e a criança como protagonista.</p>
         <Link class="text-link" href={url('/agende-visita#perguntas-frequentes')}>Ver perguntas frequentes</Link>
       </div>
-      <ul class="activity-list">
-        <li>Musicalização infantil</li>
-        <li>Yoga e movimento</li>
-        <li>Inglês para os níveis 3, 4 e 5</li>
-        <li>Robótica e cultura maker</li>
-        <li>Educação socioambiental</li>
-        <li>Arte, teatro e oficinas recreativas</li>
-      </ul>
+      <div class="atividades-turnos">
+        {turnos.map((turno) => (
+          <div>
+            <h3>{turno}</h3>
+            <ul class="activity-list activity-list-detalhada">
+              {atividades.filter((a) => a.turno === turno).map((a) => (
+                <li>
+                  {a.nome}
+                  <span>{[a.publico, a.frequencia].filter(Boolean).join(' · ')}</span>
+                  {a.detalhe && <span>{a.detalhe}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>

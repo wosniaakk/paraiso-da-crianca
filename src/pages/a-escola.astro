@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
-import { url } from '../lib/url';
 ---
 <BaseLayout title="A escola | Paraíso da Criança" description="A história e os valores do Paraíso da Criança.">
   <PageIntro eyebrow="A escola" title="Uma escola viva, afetiva e curiosa.">
@@ -15,7 +14,7 @@ import { url } from '../lib/url';
         <p>Hoje, recebemos crianças de 6 meses a 6 anos em ambientes que convidam ao movimento, à investigação e à convivência. A rotina tem estrutura e também espaço para o inesperado que uma boa pergunta pode abrir.</p>
         <blockquote class="quote">“Toda descoberta começa quando alguém tem tempo para olhar de novo.”</blockquote>
       </div>
-      <figure class="photo-card tall"><img src={url('/images/hero-garden.webp')} alt="Duas crianças exploram uma planta no jardim" loading="lazy" /><span class="photo-label">Curiosidade em movimento</span></figure>
+      <div class="bloco-cor bloco-cor-azul" aria-hidden="true"><span class="scribble">feita por muitas mãos</span></div>
     </div>
   </section>
 

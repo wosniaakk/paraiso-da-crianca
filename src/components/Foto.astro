@@ -1,0 +1,15 @@
+---
+import type { Foto } from '../data/fotos';
+import { url } from '../lib/url';
+
+interface Props {
+  foto: Foto;
+  alta?: boolean;
+}
+
+const { foto, alta = false } = Astro.props;
+---
+<figure class:list={['photo-card', { tall: alta }]}>
+  <img src={url(foto.src)} alt={foto.alt} loading="lazy" />
+  {foto.legenda && <span class="photo-label">{foto.legenda}</span>}
+</figure>
