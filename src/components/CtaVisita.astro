@@ -3,6 +3,7 @@
 import { site } from '../data/site';
 import { url } from '../lib/url';
 import { whatsapp } from '../lib/whatsapp';
+import Link from './Link.astro';
 ---
 <section class="section section-white">
   <div class="container">
@@ -12,8 +13,8 @@ import { whatsapp } from '../lib/whatsapp';
         <h2>Venha sentir o Paraíso de perto.</h2>
         <p>Uma visita é o melhor jeito de conhecer os ambientes, tirar dúvidas e perceber se a nossa escola combina com a sua família.</p>
         <div class="hero-actions">
-          <a class="button" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a>
-          <a class="button button-light" href={whatsapp()} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
+          <Link class="button" href={url('/agende-visita')}>Agendar uma visita</Link>
+          <Link class="button button-light" href={whatsapp()}>Conversar no WhatsApp</Link>
         </div>
       </div>
       <div class="visit-details">

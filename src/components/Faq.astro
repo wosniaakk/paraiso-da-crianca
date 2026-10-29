@@ -1,5 +1,6 @@
 ---
 import { faq } from '../data/faq';
+import Link from './Link.astro';
 
 const temas = faq
   .map((t) => ({ ...t, perguntas: t.perguntas.filter((p) => p.publicar) }))
@@ -9,22 +10,15 @@ const temas = faq
   {temas.map((t) => (
     <div class="faq-tema">
       <h3>{t.tema}</h3>
-      {t.perguntas.map((p) => {
-        const externo = p.link && /^https?:/.test(p.link.href);
-        return (
-          <details>
-            <summary>{p.pergunta}</summary>
-            <div class="faq-resposta">
-              <div set:html={p.resposta} />
-              {p.link && (
-                <a class="text-link" href={p.link.href} {...(externo ? { target: '_blank', rel: 'noreferrer' } : {})}>
-                  {p.link.rotulo} <span aria-hidden="true">{externo ? '↗' : '→'}</span>
-                </a>
-              )}
-            </div>
-          </details>
-        );
-      })}
+      {t.perguntas.map((p) => (
+        <details>
+          <summary>{p.pergunta}</summary>
+          <div class="faq-resposta">
+            <div set:html={p.resposta} />
+            {p.link && <Link class="text-link" href={p.link.href}>{p.link.rotulo}</Link>}
+          </div>
+        </details>
+      ))}
     </div>
   ))}
 </div>

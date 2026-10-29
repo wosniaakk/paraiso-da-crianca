@@ -6,13 +6,14 @@ import Faq from '../components/Faq.astro';
 import MapaFachada from '../components/MapaFachada.astro';
 import { site } from '../data/site';
 import { whatsapp } from '../lib/whatsapp';
+import Link from '../components/Link.astro';
 ---
 <BaseLayout title="Agende sua visita | Paraíso da Criança" description="Entre em contato e agende uma visita ao Paraíso da Criança." cta={false}>
   <PageIntro eyebrow="Agende sua visita" title="Venha conhecer o nosso jeito de cuidar." compacto>
     Fale com a secretaria pelo WhatsApp ou pelo telefone, ou deixe seus dados no formulário abaixo. A equipe entende o momento da sua família e combina o melhor horário para a visita.
     <Fragment slot="acoes">
       <div class="hero-actions">
-        <a class="button button-light" data-cta-principal href={whatsapp()} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
+        <Link class="button button-light" data-cta-principal href={whatsapp()}>Conversar no WhatsApp</Link>
         <a class="button button-outline" href={site.telefoneHref}>Ligar para a escola</a>
       </div>
       <p class="intro-nota">O número {site.telefone} atende por telefone e WhatsApp, {site.atendimento.toLowerCase()}. O botão do WhatsApp abre em nova aba, com uma mensagem pronta para você completar.</p>
@@ -33,7 +34,7 @@ import { whatsapp } from '../lib/whatsapp';
           <div class="visit-detail"><strong>Horário de atendimento</strong><span>{site.atendimento}</span></div>
           {site.prazoResposta && <div class="visit-detail"><strong>Prazo de resposta</strong><span>{site.prazoResposta}</span></div>}
           {site.diasVisita && <div class="visit-detail"><strong>Dias e horários de visita</strong><span>{site.diasVisita}</span></div>}
-          <div class="visit-detail"><strong>Endereço</strong><span>{site.endereco}</span><a class="map-link" href={site.mapaHref} target="_blank" rel="noreferrer">Abrir no mapa ↗</a></div>
+          <div class="visit-detail"><strong>Endereço</strong><span>{site.endereco}</span><Link class="map-link" href={site.mapaHref}>Abrir no mapa</Link></div>
         </div>
       </div>
     </div>
@@ -73,7 +74,7 @@ import { whatsapp } from '../lib/whatsapp';
         <p class="kicker">Como chegar</p>
         <h2>Onde estamos.</h2>
         <p class="lede">{site.endereco}</p>
-        <a class="text-link" href={site.mapaHref} target="_blank" rel="noreferrer">Abrir no mapa <span aria-hidden="true">↗</span></a>
+        <Link class="text-link" href={site.mapaHref}>Abrir no mapa</Link>
       </div>
       <MapaFachada />
     </div>

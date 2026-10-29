@@ -1,0 +1,14 @@
+---
+// Link de ação: decide ícone e atributos pelo href.
+// Externo (http/https): ↗, nova aba com rel="noopener" e aviso para leitor de tela.
+// Interno: →. tel:/mailto: e seta={false}: sem ícone.
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'> & { href: string; seta?: boolean };
+
+const { href, seta = true, ...rest } = Astro.props;
+const externo = /^https?:\/\//.test(href);
+const icone = !seta || /^(tel|mailto):/.test(href) ? null : externo ? '↗' : '→';
+const novaAba = externo ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+<a href={href} {...rest} {...novaAba}><slot />{icone && <>{' '}<span aria-hidden="true">{icone}</span></>}{externo && <span class="sr-only"> (abre em nova aba)</span>}</a>

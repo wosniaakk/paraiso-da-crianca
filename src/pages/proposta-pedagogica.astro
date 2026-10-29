@@ -4,6 +4,7 @@ import PageIntro from '../components/PageIntro.astro';
 import { url } from '../lib/url';
 
 const descricao = 'Nossa prática pedagógica parte dos direitos da criança e de territórios amplos de aprendizagem. O cotidiano combina acolhimento, investigação, autonomia e presença adulta atenta.';
+import Link from '../components/Link.astro';
 ---
 <BaseLayout title="Proposta pedagógica | Paraíso da Criança" description={descricao}>
   <PageIntro eyebrow="Proposta pedagógica" title="A aprendizagem nasce do encontro.">{descricao}</PageIntro>
@@ -46,7 +47,7 @@ const descricao = 'Nossa prática pedagógica parte dos direitos da criança e d
         <p class="kicker">Vivências</p>
         <h2>Aprender, criar e se expressar.</h2>
         <p class="lede">Aulas especiais, música, inglês, arte, movimento, robótica e educação socioambiental complementam a experiência de cada turma.</p>
-        <a class="text-link" href={url('/agende-visita#perguntas-frequentes')}>Ver perguntas frequentes <span aria-hidden="true">→</span></a>
+        <Link class="text-link" href={url('/agende-visita#perguntas-frequentes')}>Ver perguntas frequentes</Link>
       </div>
       <ul class="activity-list">
         <li>Musicalização infantil</li>

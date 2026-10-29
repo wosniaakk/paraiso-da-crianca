@@ -6,6 +6,7 @@ import { url } from '../lib/url';
 import { whatsapp as linkWhatsapp } from '../lib/whatsapp';
 
 const whatsapp = linkWhatsapp();
+import Link from '../components/Link.astro';
 ---
 <BaseLayout title="Educação Infantil com natureza e presença | Paraíso da Criança" description={site.tagline}>
   <section class="hero">
@@ -16,8 +17,8 @@ const whatsapp = linkWhatsapp();
         <h1>Crescer com tempo para descobrir.</h1>
         <p class="hero-copy">Um lugar de vínculo, movimento e curiosidade, onde cada criança encontra espaço para brincar, conviver, explorar e se expressar.</p>
         <div class="hero-actions">
-          <a class="button" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a>
-          <a class="button button-light" href={whatsapp} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
+          <Link class="button" href={url('/agende-visita')}>Agendar uma visita</Link>
+          <Link class="button button-light" href={whatsapp}>Conversar no WhatsApp</Link>
         </div>
       </div>
     </div>
@@ -30,7 +31,7 @@ const whatsapp = linkWhatsapp();
         <p class="kicker">Um jeito de estar no mundo</p>
         <h2>Uma infância de brincadeiras e descobertas.</h2>
         <p class="lede">No Paraíso, o ambiente participa da aprendizagem. A criança tem tempo para observar, inventar, perguntar e voltar àquilo que ainda quer descobrir.</p>
-        <a class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica <span aria-hidden="true">→</span></a>
+        <Link class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica</Link>
       </div>
       <div class="photo-stack">
         <figure class="photo-card"><img src={url('/images/grass-circle.webp')} alt="Crianças deitadas na grama, sorrindo" loading="lazy" /><span class="photo-label">Nossa escola</span></figure>
@@ -62,7 +63,7 @@ const whatsapp = linkWhatsapp();
         <p class="kicker">No cotidiano</p>
         <h2>Aprender também é fazer.</h2>
         <p class="lede">Música, movimento, arte, natureza e tecnologia entram na rotina com intencionalidade e leveza.</p>
-        <a class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica <span aria-hidden="true">→</span></a>
+        <Link class="text-link" href={url('/proposta-pedagogica')}>Conhecer a proposta pedagógica</Link>
       </div>
       <ul class="activity-list">
         <li>Musicalização infantil</li>
@@ -101,7 +102,7 @@ const whatsapp = linkWhatsapp();
         <p class="kicker">Desde 2002</p>
         <h2>Uma história feita de presença.</h2>
         <p class="lede">Somos uma escola de educação infantil com trajetória familiar, construída no encontro diário com as crianças e suas famílias.</p>
-        <a class="text-link" href={url('/a-escola')}>Conheça a nossa história <span aria-hidden="true">→</span></a>
+        <Link class="text-link" href={url('/a-escola')}>Conheça a nossa história</Link>
       </div>
     </div>
   </section>

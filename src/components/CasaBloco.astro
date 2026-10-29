@@ -10,6 +10,7 @@ interface Props {
 
 const { casa } = Astro.props;
 const atividades = atividadesPara(casa.turmas);
+import Link from './Link.astro';
 ---
 <article id={casa.id} class={`casa-bloco ${casa.cor}`} aria-labelledby={`${casa.id}-titulo`}>
   <div class="casa-texto">
@@ -33,8 +34,8 @@ const atividades = atividadesPara(casa.turmas);
       })}
     </dl>
     <div class="casa-acoes">
-      <a class="text-link" href={url('/agende-visita')}>Agendar uma visita <span aria-hidden="true">→</span></a>
-      <a class="text-link" href={whatsappCasa(casa.nome)} target="_blank" rel="noreferrer">Conversar no WhatsApp <span aria-hidden="true">↗</span></a>
+      <Link class="text-link" href={url('/agende-visita')}>Agendar uma visita</Link>
+      <Link class="text-link" href={whatsappCasa(casa.nome)}>Conversar no WhatsApp</Link>
     </div>
   </div>
   <!-- Sem foto real das salas desta casa: bloco de cor da marca (pendência com a escola). -->

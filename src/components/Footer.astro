@@ -2,6 +2,7 @@
 import { site } from '../data/site';
 import { url } from '../lib/url';
 import { whatsapp } from '../lib/whatsapp';
+import Link from './Link.astro';
 ---
 <footer class="site-footer">
   <div class="footer-grid">
@@ -13,13 +14,13 @@ import { whatsapp } from '../lib/whatsapp';
       <p class="footer-label">Visite a gente</p>
       <address>{site.endereco}</address>
       <a href={site.telefoneHref}>Telefone {site.telefone}</a>
-      <a href={whatsapp()} target="_blank" rel="noreferrer">WhatsApp {site.telefone} ↗</a>
+      <Link href={whatsapp()}>WhatsApp {site.telefone}</Link>
       <span>{site.atendimento}</span>
     </div>
     <div>
       <p class="footer-label">Para acompanhar</p>
-      <a href={site.instagram} target="_blank" rel="noreferrer">Instagram ↗</a>
-      <a href={site.facebook} target="_blank" rel="noreferrer">Facebook ↗</a>
+      <Link href={site.instagram}>Instagram</Link>
+      <Link href={site.facebook}>Facebook</Link>
       <a href={url('/privacidade')}>Privacidade</a>
     </div>
   </div>
