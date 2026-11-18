@@ -13,7 +13,8 @@ index.html                           Início
 nossa-historia/index.html            Nossa História
 bercario/index.html                  Berçário
 educacao-infantil/index.html         Educação Infantil
-territorios/index.html               Territórios
+espacos/index.html                   Espaços
+territorios/index.html               endereço antigo: redireciona para /espacos/
 proposta-pedagogica/index.html       Proposta Pedagógica
 contato/index.html                   Contato (formulário de visita)
 politica-de-privacidade/index.html   Política de Privacidade
@@ -22,10 +23,11 @@ politica-de-privacidade/index.html   Política de Privacidade
 assets/site.css    visual do site (cores, tipografia, componentes)
 assets/site.js     menu do celular, animações de entrada, cabeçalho e formulário
 img/               fotos: cada uma em .jpg/.png e .webp
-videos/            vídeo da linha do tempo (Nossa História)
+videos/            vídeos (linha do tempo da Nossa História e, quando chegarem, depoimentos das famílias)
 
 sitemap.xml, robots.txt          para os buscadores
-PENDENCIAS.md                    textos e fotos que ainda dependem da escola
+PENDENCIAS.md                    textos e dados que ainda dependem da escola
+IMAGENS-PENDENTES.md             fotos e vídeos a produzir (#01 a #18)
 scripts/trocar-dominio.sh        troca o domínio das URLs absolutas
 .github/workflows/deploy.yml     publica no GitHub Pages a cada push na main
 ```
@@ -48,6 +50,9 @@ Abra o arquivo da página e altere o texto entre as tags. Alguns padrões que se
 | `<span class="kicker">…</span>` | etiqueta acima do título |
 | `<span class="script">…</span>` | frase na fonte manuscrita |
 
+O menu tem Nossa História, Espaços, Proposta Pedagógica e o botão "Agende uma visita"; Berçário, Educação Infantil,
+Contato e Política de Privacidade ficam no rodapé.
+
 Partes repetidas em todas as páginas (cabeçalho, menu, rodapé, botão do WhatsApp) estão escritas em cada
 arquivo. Ao mudar uma delas, por exemplo o telefone, troque em todos os `.html`: uma busca no editor por
 `3347-7341` encontra todos os lugares.
@@ -69,20 +74,31 @@ Cada foto usa `<picture>`: o navegador pega a versão `.webp` (mais leve) e, se 
 - Para gerar a versão `.webp`: `cwebp -q 78 foto.jpg -o foto.webp` (ou o site squoosh.app).
 - Só use fotos de crianças com autorização de uso de imagem assinada pelos responsáveis.
 
+### Trocar um espaço reservado pela foto real
+
+Os quadros tracejados "IMAGEM A PRODUZIR #NN" estão listados em `IMAGENS-PENDENTES.md`. Para trocar um deles:
+
+1. Salve a foto com o nome indicado no comentário que fica logo antes do quadro no HTML
+   (`<!-- IMAGEM A PRODUZIR #NN | arquivo: img/nome.jpg -->`) e gere a versão `.webp` com o mesmo nome.
+2. No HTML, apague o comentário e o `<figure ... role="img" aria-label="...">` inteiro, até o `</figure>`, e cole no lugar:
+   ```html
+   <figure class="MESMAS CLASSES DO QUADRO" style="MESMO STYLE, SE HOUVER"><picture><source srcset="img/nome.webp" type="image/webp"><img src="img/nome.jpg" alt="Descrição da cena" width="LARGURA" height="ALTURA" loading="lazy" decoding="async"></picture></figure>
+   ```
+   Mantenha as classes e o `style` do quadro (eles dão o formato), use as medidas reais da foto em `width`/`height` e
+   reaproveite o texto do `aria-label` como `alt`. Nas páginas dentro de pastas, o caminho começa com `../img/`.
+3. Abra a página no navegador, confira o recorte e risque o item em `IMAGENS-PENDENTES.md`.
+
+Para os vídeos das famílias (#05 a #07), o passo 2 usa um vídeo no lugar da foto, com a capa em `.jpg`:
+`<figure class="rimg"><video controls playsinline preload="none" poster="videos/nome.jpg" width="1080" height="1920" style="width:100%;height:100%;object-fit:cover"><source src="videos/nome.mp4" type="video/mp4"></video></figure>`
+
 ## Formulário de contato
 
-O formulário (`contato/index.html`) valida os dados no navegador. Hoje **não há serviço de envio
-configurado**: ao enviar, o site mostra um link para o WhatsApp da escola com a mensagem já preenchida.
+O formulário (`contato/index.html`) **não envia nem guarda dados**. Ele só monta uma mensagem com nome, nome da criança
+(opcional), idade e melhor período, e abre o WhatsApp da escola (`wa.me`) em nova aba. O número fica em
+`data-whatsapp` no `<form>` e nos links `wa.me` das páginas. A etapa (Berçário ou Educação Infantil) vem da idade escolhida.
 
-Para receber os pedidos por e-mail, crie um formulário no Formspree (formspree.io) ou serviço parecido e cole o
-endereço no atributo `data-endpoint` do `<form>`:
-
-```html
-<form class="form" id="form" … data-endpoint="https://formspree.io/f/abcdwxyz" …>
-```
-
-Com o endereço preenchido, o site envia os dados por `POST` (JSON) e mostra a mensagem de sucesso que está em
-`data-sucesso`. Ao ativar, atualize a seção "Com quem compartilhamos" da Política de Privacidade, se precisar.
+Sem JavaScript, o botão "Agendar pelo WhatsApp" funciona como link simples para o WhatsApp com a mensagem padrão.
+Se um dia o formulário passar a enviar dados para algum serviço, atualize a Política de Privacidade.
 
 ## Ver o site no computador
 
