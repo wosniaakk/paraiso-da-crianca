@@ -55,7 +55,6 @@ Não estão no site porque não foram informados; ajudam o Google a mostrar a es
 - CEP do endereço (`postalCode` nos dados estruturados de `index.html`)
 - Dias de funcionamento (o site informa só o horário da secretaria, 07h15 às 18h45)
 - Coordenadas exatas (latitude/longitude) e link do perfil no Google Maps / Perfil da Empresa
-- Confirmar o e-mail: o site usa `contato@paraisodacrianca.com.br`, mas o domínio do site será `ceiparaisodacrianca.com.br`
 
 ## Outros
 
