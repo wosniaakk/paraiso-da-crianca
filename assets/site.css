@@ -419,6 +419,11 @@ fieldset.field{border:0;padding:0;margin:0}
 .check{display:flex;gap:.8rem;align-items:flex-start;font-size:.95rem}
 .check input{width:22px;height:22px;flex-shrink:0;margin-top:.15rem;accent-color:var(--red)}
 .form .btn{margin-top:var(--s-3);width:100%}
+.form .btn svg{width:22px;height:22px}
+.form .btn:hover svg{transform:none}
+.form__nota{margin:var(--s-3) 0 0;font-size:.9rem;color:var(--gray-2)}
+.form__nota a,.form__alt a{color:var(--red);font-weight:700}
+.form__alt{margin:.9rem 0 0;text-align:center;font-size:.92rem}
 .form__status{margin-top:var(--s-3);border-radius:var(--r-md);padding:1.1rem 1.3rem;font-weight:600}
 .form__status:empty{display:none}
 .form__status.ok{background:var(--green-soft);color:#3c5a07}

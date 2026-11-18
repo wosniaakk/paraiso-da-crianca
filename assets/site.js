@@ -59,112 +59,78 @@ if (reduzirMovimento() || !('IntersectionObserver' in window)) {
 }
 
 /* ------------------------------------------------------------ formulário de contato */
-// Configuração no próprio <form>: data-endpoint (Formspree ou similar; vazio = sem envio automático),
-// data-whatsapp, data-telefone e data-sucesso.
+// O formulário só monta uma mensagem e abre o WhatsApp da escola (data-whatsapp no <form>).
+// Nada é enviado por e-mail nem guardado pelo site. Sem JavaScript, o botão já é um link
+// para o WhatsApp com a mensagem padrão.
 const form = document.getElementById('form');
 
 if (form) {
   const status = document.getElementById('form-status');
-  const { endpoint, whatsapp, telefone, sucesso } = form.dataset;
-  const linkWhatsapp = (mensagem) => `https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
-  const avisoAba = '<span class="sr-only"> (abre em nova aba)</span>';
+  const enviar = document.getElementById('form-enviar');
+  const linkWhatsapp = (mensagem) => `https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(mensagem)}`;
 
   const regras = {
-    nome: (v) => v.trim().length >= 3 || 'Informe o nome do responsável.',
-    idade: (v) => !!v || 'Selecione a idade ou faixa etária da criança.',
-    email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || 'Informe um e-mail válido, como nome@exemplo.com.',
-    whatsapp: (v) => v.replace(/\D/g, '').length >= 10 || 'Informe um WhatsApp com DDD.',
-    interesse: (v) => !!v || 'Escolha Berçário ou Educação Infantil.',
-    consentimento: (v) => v || 'É preciso autorizar o uso dos dados para o contato.',
+    nome: (v) => v.trim().length >= 2 || 'Informe seu nome.',
+    idade: (v) => !!v || 'Selecione a idade da criança.',
+    periodo: (v) => !!v || 'Escolha manhã ou tarde.',
   };
-  const idErro = { nome: 'e-nome', idade: 'e-idade', email: 'e-email', whatsapp: 'e-whats', interesse: 'e-interesse', consentimento: 'e-lgpd' };
-
-  const valor = (nome) => {
-    if (nome === 'consentimento') return form.consentimento.checked;
-    if (nome === 'interesse') return form.querySelector('[name=interesse]:checked')?.value || '';
-    return form[nome].value;
-  };
+  const valor = (nome) => (nome === 'periodo' ? form.querySelector('[name=periodo]:checked')?.value || '' : form[nome].value);
 
   const validar = (nome) => {
     const resultado = regras[nome](valor(nome));
-    const caixa = document.getElementById(idErro[nome]);
+    const caixa = document.getElementById(`e-${nome}`);
     const campo = caixa.closest('.field');
     const entradas = form.querySelectorAll(`[name=${nome}]`);
-    if (resultado === true) {
-      caixa.textContent = '';
-      campo.removeAttribute('data-invalid');
-      entradas.forEach((el) => el.removeAttribute('aria-invalid'));
-      return true;
-    }
-    caixa.textContent = resultado;
-    campo.setAttribute('data-invalid', '');
-    entradas.forEach((el) => el.setAttribute('aria-invalid', 'true'));
-    return false;
+    const ok = resultado === true;
+    caixa.textContent = ok ? '' : resultado;
+    campo.toggleAttribute('data-invalid', !ok);
+    entradas.forEach((el) => (ok ? el.removeAttribute('aria-invalid') : el.setAttribute('aria-invalid', 'true')));
+    return ok;
   };
 
   Object.keys(regras).forEach((nome) => {
     form.querySelectorAll(`[name=${nome}]`).forEach((el) => {
-      el.addEventListener(el.type === 'radio' || el.type === 'checkbox' ? 'change' : 'blur', () => validar(nome));
+      el.addEventListener(el.type === 'radio' ? 'change' : 'blur', () => validar(nome));
     });
   });
 
-  // Máscara simples do WhatsApp: (41) 99999-9999
-  form.whatsapp.addEventListener('input', (evento) => {
-    const d = evento.target.value.replace(/\D/g, '').slice(0, 11);
-    evento.target.value = d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, d.length - 4)}-${d.slice(-4)}` : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
-  });
+  const mensagem = () => {
+    const nome = form.nome.value.trim();
+    const crianca = form.crianca.value.trim();
+    const idade = valor('idade');
+    return [
+      'Olá! Gostaria de agendar uma visita ao Paraíso da Criança.',
+      `Meu nome: ${nome}`,
+      crianca && `Criança: ${crianca}`,
+      `Idade: ${idade}`,
+      `Interesse: ${idade === '6 meses a 1 ano' ? 'Berçário' : 'Educação Infantil'}`,
+      `Melhor período: ${valor('periodo')}`,
+    ].filter(Boolean).join('\n');
+  };
 
-  form.addEventListener('submit', async (evento) => {
-    evento.preventDefault();
+  // Valida e, se estiver tudo certo, deixa o link abrir o WhatsApp com a mensagem montada.
+  const preparar = (evento) => {
     status.className = 'form__status';
     status.textContent = '';
-
     const invalidos = Object.keys(regras).filter((nome) => !validar(nome));
     if (invalidos.length) {
+      evento.preventDefault();
       form.querySelector(`[name=${invalidos[0]}]`).focus();
       status.className = 'form__status err';
       status.textContent = `Revise ${invalidos.length === 1 ? 'o campo destacado' : `os ${invalidos.length} campos destacados`} para continuar.`;
-      return;
+      return false;
     }
+    enviar.href = linkWhatsapp(mensagem());
+    return true;
+  };
 
-    const d = Object.fromEntries(new FormData(form));
-    const resumo = [
-      'Olá! Gostaria de agendar uma visita ao Paraíso da Criança.',
-      `Responsável: ${d.nome}`,
-      d.crianca ? `Criança: ${d.crianca}` : '',
-      `Idade: ${d.idade}`,
-      `Interesse: ${d.interesse}`,
-      `E-mail: ${d.email}`,
-      `WhatsApp: ${d.whatsapp}`,
-      d.mensagem ? `Mensagem: ${d.mensagem}` : '',
-    ].filter(Boolean).join('\n');
-
-    // Sem serviço de envio configurado: oferece o WhatsApp com a mensagem pronta.
-    if (!endpoint) {
-      status.className = 'form__status warn';
-      status.innerHTML = `Seus dados estão corretos, mas o envio automático deste formulário ainda não foi configurado. Para agendar agora, <a href="${linkWhatsapp(resumo)}" target="_blank" rel="noopener">envie sua solicitação pelo WhatsApp${avisoAba}</a> (a mensagem já vai preenchida) ou ligue para ${telefone}.`;
-      return;
-    }
-
-    const botao = form.querySelector('button[type=submit]');
-    botao.disabled = true;
-    botao.setAttribute('aria-busy', 'true');
-    try {
-      const resposta = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(d),
-      });
-      if (!resposta.ok) throw new Error(String(resposta.status));
-      form.reset();
-      status.className = 'form__status ok';
-      status.textContent = sucesso;
-    } catch {
-      status.className = 'form__status err';
-      status.innerHTML = `Não foi possível enviar agora. Tente novamente ou <a href="${linkWhatsapp(resumo)}" target="_blank" rel="noopener">fale conosco pelo WhatsApp${avisoAba}</a>.`;
-    } finally {
-      botao.disabled = false;
-      botao.removeAttribute('aria-busy');
+  enviar.addEventListener('click', preparar);
+  form.addEventListener('submit', (evento) => evento.preventDefault());
+  // Enter dentro de um campo de texto equivale a clicar no botão.
+  form.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Enter' && evento.target.matches('input:not([type=radio])')) {
+      evento.preventDefault();
+      enviar.click();
     }
   });
 }
