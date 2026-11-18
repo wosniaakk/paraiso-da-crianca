@@ -367,6 +367,7 @@ body.hide-ids .rimg__tag{display:none}
 /* Quote / big statement */
 .statement{text-align:center;max-width:56rem;margin-inline:auto}
 .statement h2,.statement .h2{font-size:clamp(2rem,1.3rem + 3vw,3.8rem)}
+.statement p.h2{color:var(--ink);font-weight:800;line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
 .statement .arcs{margin:0 auto var(--s-3)}
 
 /* Timeline (placeholder) */
