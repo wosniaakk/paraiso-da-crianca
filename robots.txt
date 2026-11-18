@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ceiparaisodacrianca.com.br/sitemap.xml
