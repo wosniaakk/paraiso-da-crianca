@@ -58,79 +58,62 @@ if (reduzirMovimento() || !('IntersectionObserver' in window)) {
   animados.forEach((el) => observador.observe(el));
 }
 
-/* ------------------------------------------------------------ formulário de contato */
-// O formulário só monta uma mensagem e abre o WhatsApp da escola (data-whatsapp no <form>).
-// Nada é enviado por e-mail nem guardado pelo site. Sem JavaScript, o botão já é um link
-// para o WhatsApp com a mensagem padrão.
-const form = document.getElementById('form');
+/* ------------------------------------------------------------ depoimentos */
+// A fileira avança sozinha a cada 6 s. Para quando o mouse ou o foco estão nela, quando a pessoa
+// aperta "Pausar" e quando o sistema pede menos movimento. Sem JS, a fileira só rola à mão.
+const depo = document.querySelector('[data-depo]');
 
-if (form) {
-  const status = document.getElementById('form-status');
-  const enviar = document.getElementById('form-enviar');
-  const linkWhatsapp = (mensagem) => `https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(mensagem)}`;
+if (depo) {
+  const trilho = depo.querySelector('.depo__trilho');
+  const botaoPausa = depo.querySelector('[data-depo-pausa]');
+  let pausadoPelaPessoa = reduzirMovimento();
+  let parado = false;
 
-  const regras = {
-    nome: (v) => v.trim().length >= 2 || 'Informe seu nome.',
-    idade: (v) => !!v || 'Selecione a idade da criança.',
-    periodo: (v) => !!v || 'Escolha manhã ou tarde.',
+  const passo = () => {
+    const cartao = trilho.querySelector('.depo__card');
+    return cartao.getBoundingClientRect().width + parseFloat(getComputedStyle(cartao.parentElement).columnGap || 0);
   };
-  const valor = (nome) => (nome === 'periodo' ? form.querySelector('[name=periodo]:checked')?.value || '' : form[nome].value);
-
-  const validar = (nome) => {
-    const resultado = regras[nome](valor(nome));
-    const caixa = document.getElementById(`e-${nome}`);
-    const campo = caixa.closest('.field');
-    const entradas = form.querySelectorAll(`[name=${nome}]`);
-    const ok = resultado === true;
-    caixa.textContent = ok ? '' : resultado;
-    campo.toggleAttribute('data-invalid', !ok);
-    entradas.forEach((el) => (ok ? el.removeAttribute('aria-invalid') : el.setAttribute('aria-invalid', 'true')));
-    return ok;
+  const avancar = (direcao = 1) => {
+    const fim = trilho.scrollLeft + trilho.clientWidth >= trilho.scrollWidth - 8;
+    if (direcao > 0 && fim) trilho.scrollTo({ left: 0 });
+    else if (direcao < 0 && trilho.scrollLeft <= 8) trilho.scrollTo({ left: trilho.scrollWidth });
+    else trilho.scrollBy({ left: direcao * passo() });
+  };
+  const mostrarPausa = () => {
+    botaoPausa.setAttribute('aria-pressed', String(pausadoPelaPessoa));
+    botaoPausa.setAttribute('aria-label', pausadoPelaPessoa ? 'Continuar a rolagem dos depoimentos' : 'Pausar a rolagem dos depoimentos');
+    botaoPausa.innerHTML = pausadoPelaPessoa
+      ? '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>'
+      : '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="5" width="3.5" height="14" rx="1" /><rect x="13.5" y="5" width="3.5" height="14" rx="1" /></svg>';
   };
 
-  Object.keys(regras).forEach((nome) => {
-    form.querySelectorAll(`[name=${nome}]`).forEach((el) => {
-      el.addEventListener(el.type === 'radio' ? 'change' : 'blur', () => validar(nome));
+  depo.querySelector('[data-depo-prox]').addEventListener('click', () => avancar(1));
+  depo.querySelector('[data-depo-ant]').addEventListener('click', () => avancar(-1));
+  botaoPausa.addEventListener('click', () => { pausadoPelaPessoa = !pausadoPelaPessoa; mostrarPausa(); });
+  ['mouseenter', 'focusin', 'touchstart'].forEach((ev) => trilho.addEventListener(ev, () => { parado = true; }, { passive: true }));
+  ['mouseleave', 'focusout'].forEach((ev) => trilho.addEventListener(ev, () => { parado = false; }));
+  mostrarPausa();
+  setInterval(() => { if (!pausadoPelaPessoa && !parado && !document.hidden) avancar(1); }, 6000);
+}
+
+/* ------------------------------------------------------------ portfólio: foto ampliada */
+// Sem JavaScript, cada foto é um link para o arquivo em tamanho grande.
+const caixaFoto = document.getElementById('lightbox');
+
+if (caixaFoto && typeof caixaFoto.showModal === 'function') {
+  const imagem = document.createElement('img'); // entra na página só ao abrir a primeira foto
+  const legenda = caixaFoto.querySelector('.lightbox__legenda');
+  document.querySelectorAll('.pitem__link').forEach((link) => {
+    link.addEventListener('click', (evento) => {
+      evento.preventDefault();
+      if (!imagem.isConnected) legenda.before(imagem);
+      imagem.src = link.href;
+      imagem.alt = link.querySelector('img').alt;
+      legenda.textContent = link.dataset.legenda || '';
+      caixaFoto.showModal();
     });
   });
-
-  const mensagem = () => {
-    const nome = form.nome.value.trim();
-    const crianca = form.crianca.value.trim();
-    const idade = valor('idade');
-    return [
-      'Olá! Gostaria de agendar uma visita ao Paraíso da Criança.',
-      `Meu nome: ${nome}`,
-      crianca && `Criança: ${crianca}`,
-      `Idade: ${idade}`,
-      `Interesse: ${idade === '6 meses a 1 ano' ? 'Berçário' : 'Educação Infantil'}`,
-      `Melhor período: ${valor('periodo')}`,
-    ].filter(Boolean).join('\n');
-  };
-
-  // Valida e, se estiver tudo certo, deixa o link abrir o WhatsApp com a mensagem montada.
-  const preparar = (evento) => {
-    status.className = 'form__status';
-    status.textContent = '';
-    const invalidos = Object.keys(regras).filter((nome) => !validar(nome));
-    if (invalidos.length) {
-      evento.preventDefault();
-      form.querySelector(`[name=${invalidos[0]}]`).focus();
-      status.className = 'form__status err';
-      status.textContent = `Revise ${invalidos.length === 1 ? 'o campo destacado' : `os ${invalidos.length} campos destacados`} para continuar.`;
-      return false;
-    }
-    enviar.href = linkWhatsapp(mensagem());
-    return true;
-  };
-
-  enviar.addEventListener('click', preparar);
-  form.addEventListener('submit', (evento) => evento.preventDefault());
-  // Enter dentro de um campo de texto equivale a clicar no botão.
-  form.addEventListener('keydown', (evento) => {
-    if (evento.key === 'Enter' && evento.target.matches('input:not([type=radio])')) {
-      evento.preventDefault();
-      enviar.click();
-    }
-  });
+  caixaFoto.querySelector('.lightbox__fechar').addEventListener('click', () => caixaFoto.close());
+  // Clique fora da foto fecha
+  caixaFoto.addEventListener('click', (evento) => { if (evento.target === caixaFoto) caixaFoto.close(); });
 }
