@@ -212,7 +212,12 @@ body.hide-ids .rimg__tag{display:none}
 .pcard:hover .rimg img{transform:scale(1.04)}
 .pcard--edu{border-radius:var(--r-xl) var(--r-xl) var(--r-xl) var(--r-sm)}
 .pcard--bb{border-radius:var(--r-xl) var(--r-xl) var(--r-sm) var(--r-xl)}
-@media (max-width:760px){.programs{grid-template-columns:1fr}.pcard{min-height:480px}}
+@media (max-width:760px){
+  .programs{grid-template-columns:1fr}.pcard{min-height:480px}
+  /* No celular o texto pode ser mais alto que a área escura da foto: o escurecimento acompanha o texto */
+  .pcard__body{position:relative}
+  .pcard__body::before{content:"";position:absolute;inset:-5rem 0 0;z-index:-1;background:linear-gradient(180deg,transparent,rgba(20,15,10,.6) 5rem,rgba(20,15,10,.82))}
+}
 
 /* Galeria editorial da home */
 .terr{background:var(--green-soft);border-radius:var(--r-xl);margin-inline:clamp(.5rem,1.5vw,1.5rem);overflow:hidden;position:relative}
@@ -236,6 +241,10 @@ body.hide-ids .rimg__tag{display:none}
   .mosaic > :nth-child(1) .rimg{aspect-ratio:16/10}
   .mosaic > :nth-child(5){grid-column:1/3!important}
   .mosaic > :nth-child(5) .rimg{aspect-ratio:3/1}
+  .mosaic .ph{padding:.75rem;gap:.3rem}
+  .mosaic .ph svg{display:none}
+  .mosaic .ph__id{font-size:.68rem;letter-spacing:.08em}
+  .mosaic .ph__desc{font-size:.76rem;line-height:1.3}
 }
 
 /* História */
