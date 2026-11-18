@@ -14,20 +14,21 @@ nossa-historia/index.html            Nossa História
 bercario/index.html                  Berçário
 educacao-infantil/index.html         Educação Infantil
 espacos/index.html                   Espaços
+portfolio/index.html                 Portfólio (fotos por categoria)
 territorios/index.html               endereço antigo: redireciona para /espacos/
+contato/index.html                   endereço antigo: abre o WhatsApp da escola
 proposta-pedagogica/index.html       Proposta Pedagógica
-contato/index.html                   Contato (formulário de visita)
 politica-de-privacidade/index.html   Política de Privacidade
 404.html                             Página de "não encontrado"
 
 assets/site.css    visual do site (cores, tipografia, componentes)
 assets/site.js     menu do celular, animações de entrada, cabeçalho e formulário
 img/               fotos: cada uma em .jpg/.png e .webp
-videos/            vídeos (linha do tempo da Nossa História e, quando chegarem, depoimentos das famílias)
+videos/            vídeo da linha do tempo (Nossa História)
 
 sitemap.xml, robots.txt          para os buscadores
 PENDENCIAS.md                    textos e dados que ainda dependem da escola
-IMAGENS-PENDENTES.md             fotos e vídeos a produzir (#01 a #18)
+IMAGENS-PENDENTES.md             fotos a produzir (#01 a #15)
 scripts/trocar-dominio.sh        troca o domínio das URLs absolutas
 .github/workflows/deploy.yml     publica no GitHub Pages a cada push na main
 ```
@@ -50,8 +51,8 @@ Abra o arquivo da página e altere o texto entre as tags. Alguns padrões que se
 | `<span class="kicker">…</span>` | etiqueta acima do título |
 | `<span class="script">…</span>` | frase na fonte manuscrita |
 
-O menu tem Nossa História, Espaços, Proposta Pedagógica e o botão "Agende uma visita"; Berçário, Educação Infantil,
-Contato e Política de Privacidade ficam no rodapé.
+O menu tem Nossa História, Espaços, Proposta Pedagógica, Portfólio e o botão "Agende uma visita"; Berçário, Educação
+Infantil e Política de Privacidade ficam no rodapé.
 
 Partes repetidas em todas as páginas (cabeçalho, menu, rodapé, botão do WhatsApp) estão escritas em cada
 arquivo. Ao mudar uma delas, por exemplo o telefone, troque em todos os `.html`: uma busca no editor por
@@ -88,17 +89,23 @@ Os quadros tracejados "IMAGEM A PRODUZIR #NN" estão listados em `IMAGENS-PENDEN
    reaproveite o texto do `aria-label` como `alt`. Nas páginas dentro de pastas, o caminho começa com `../img/`.
 3. Abra a página no navegador, confira o recorte e risque o item em `IMAGENS-PENDENTES.md`.
 
-Para os vídeos das famílias (#05 a #07), o passo 2 usa um vídeo no lugar da foto, com a capa em `.jpg`:
-`<figure class="rimg"><video controls playsinline preload="none" poster="videos/nome.jpg" width="1080" height="1920" style="width:100%;height:100%;object-fit:cover"><source src="videos/nome.mp4" type="video/mp4"></video></figure>`
+### Portfólio: incluir uma foto
 
-## Formulário de contato
+Em `portfolio/index.html`, copie um bloco `<figure class="pitem" ...>` inteiro e troque o nome dos arquivos, o `alt`,
+a legenda (em `data-legenda` e no `<figcaption>`) e as medidas. Em `data-cat`, coloque uma ou mais categorias separadas
+por espaço: `espacos`, `natureza`, `atividades`, `bercario`. O filtro "Todas" mostra todas as fotos.
 
-O formulário (`contato/index.html`) **não envia nem guarda dados**. Ele só monta uma mensagem com nome, nome da criança
-(opcional), idade e melhor período, e abre o WhatsApp da escola (`wa.me`) em nova aba. O número fica em
-`data-whatsapp` no `<form>` e nos links `wa.me` das páginas. A etapa (Berçário ou Educação Infantil) vem da idade escolhida.
+### Depoimentos
 
-Sem JavaScript, o botão "Agendar pelo WhatsApp" funciona como link simples para o WhatsApp com a mensagem padrão.
-Se um dia o formulário passar a enviar dados para algum serviço, atualize a Política de Privacidade.
+Ficam na Início, seção "O que dizem as famílias". Cada um é um `<li class="depo__card">` com o texto, o nome e quem é a
+pessoa. A fileira rola sozinha a cada 6 segundos (para com o mouse em cima, com o botão de pausa ou quando o sistema pede
+menos movimento) e também pode ser rolada à mão.
+
+## Agendamento de visitas
+
+Todos os botões "Agende uma visita" abrem o WhatsApp da escola (`wa.me/554133477341`) em nova aba, com a mensagem
+"Olá! Gostaria de agendar uma visita ao Paraíso da Criança." O site não tem formulário. O endereço antigo `/contato/`
+também abre o WhatsApp. Para trocar o número ou a mensagem, busque `wa.me/554133477341` em todos os `.html`.
 
 ## Ver o site no computador
 

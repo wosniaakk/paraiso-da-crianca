@@ -8,8 +8,19 @@ Para achar todos: procure por `class="todo"` nos arquivos `.html`.
 
 | Página | Arquivo | Trecho | Onde |
 |---|---|---|---|
-| Política de Privacidade | `politica-de-privacidade/index.html` | `[RAZÃO SOCIAL]` | Seção 1, "Quem é responsável pelos seus dados" |
-| Política de Privacidade | `politica-de-privacidade/index.html` | `[CNPJ]` | Seção 1, "Quem é responsável pelos seus dados" |
+| Início | `index.html` | `[Depoimento a receber da escola]`, `[Nome]` e quem é a pessoa | Seção "O que dizem as famílias" (5 cartões) |
+
+### Depoimentos das famílias
+
+Pedir à escola, para cada depoimento:
+- o texto (curto: 2 a 4 frases funcionam melhor no cartão);
+- o nome como deve aparecer;
+- quem é a pessoa: mãe ou pai de criança do Paraíso, pai ou mãe que estudou no Paraíso, alguém que viveu a infância aqui, família do Berçário;
+- autorização para publicar.
+
+O guia de escrita do site evita a palavra "aluno"; por isso os rótulos de exemplo usam "criança do Paraíso" e "estudou no Paraíso".
+No HTML, cada depoimento é um `<li class="depo__card">`: troque os textos entre colchetes e, para incluir mais um, copie um `<li>` inteiro.
+Se sobrar cartão sem depoimento, apague o `<li>` dele.
 
 ## Confirmar com a escola
 
@@ -19,12 +30,14 @@ Para achar todos: procure por `class="todo"` nos arquivos `.html`.
 - **Horários da Educação Infantil:** a página Educação Infantil repete os períodos e horários do Berçário. Confirmar se são
   os mesmos.
 
-## Imagens e vídeos a produzir
+## Imagens a produzir
 
-Estão listados em [IMAGENS-PENDENTES.md](IMAGENS-PENDENTES.md): são 15 fotos e 3 vídeos, numerados de #01 a #18.
+Estão listadas em [IMAGENS-PENDENTES.md](IMAGENS-PENDENTES.md): são 15 fotos, numeradas de #01 a #15.
 
-Os vídeos de depoimento (Início, "O que dizem as famílias") precisam de autorização de uso de imagem das famílias.
-O site não traz falas nem nomes; o conteúdo vem dos vídeos reais.
+## Portfólio
+
+A página Portfólio começa com as 10 fotos que o site já tem. Pedir à escola mais fotos de espaços, natureza, atividades e
+Berçário (com autorização de uso de imagem) e incluir como explicado no README.
 
 ## Dados para SEO (Google)
 
