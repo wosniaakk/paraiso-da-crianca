@@ -455,15 +455,27 @@ fieldset.field{border:0;padding:0;margin:0}
 .table-scroll{overflow-x:auto;border-radius:var(--r-md)}
 
 /* Animações de entrada */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.reveal.in{opacity:1;transform:none}
+/* Só esconde quando o JavaScript está ativo (ele adiciona .js no <html>); sem JS, todo o conteúdo aparece */
+.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .reveal{opacity:1;transform:none;transition:none}
+  .js .reveal{opacity:1;transform:none;transition:none}
   *{animation:none!important;transition-duration:.01ms!important}
 }
 .page-enter{animation:pageIn .6s var(--ease)}
 @keyframes pageIn{from{opacity:0}to{opacity:1}}
+
+/* <picture> não cria caixa própria: as regras de .rimg img continuam valendo como antes */
+picture{display:contents}
+
+/* Sem JavaScript, o menu do celular fica aberto no fluxo da página */
+@media (max-width:1020px){
+  html:not(.js) .menu-btn{display:none}
+  html:not(.js) .header__in{flex-wrap:wrap;padding-bottom:var(--s-2)}
+  html:not(.js) .nav{position:static;inset:auto;width:100%;transform:none;opacity:1;visibility:visible;box-shadow:none;padding:0;max-height:none}
+  html:not(.js) .nav a{font-size:1rem;padding:.6rem .9rem}
+}
 
 /* Faixas com fundo areia e cantos arredondados */
 .band{background:var(--sand);border-radius:var(--r-xl);margin-inline:clamp(.5rem,1.5vw,1.5rem)}
